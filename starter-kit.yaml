@@ -1,3 +1,4 @@
+version: 0.1.0
 updatable: false
 export_paths:
   - config/statamic

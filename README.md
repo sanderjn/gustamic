@@ -1,5 +1,7 @@
 # Gustamic - Restaurant Statamic Starter Kit
 
+**Version: 0.1.0**
+
 A modern Statamic starter kit designed specifically for restaurants, cafes, and food businesses. Built with Tailwind CSS v4 and Alpine.js.
 
 ## Features
