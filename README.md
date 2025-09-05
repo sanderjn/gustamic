@@ -25,7 +25,7 @@ A modern Statamic starter kit designed specifically for restaurants, cafes, and 
 Install this starter kit via the Statamic CLI:
 
 ```bash
-statamic new my-restaurant gustamic
+statamic new my-restaurant sanderjn/gustamic
 ```
 
 During installation, you'll be prompted whether to include sample content. Choose "Yes" if you want example menu items and pages to help you get started.
