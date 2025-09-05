@@ -1,0 +1,23 @@
+{{#
+    @name Logo Component
+    @param {string} text - Brand/restaurant name
+    @param {string} href - Logo link URL (default: "/")
+    @param {string} class - Additional CSS classes
+#}}
+{{ if restaurant_details:restaurant_logo }}
+    <img
+        src="{{ glide:restaurant_details:restaurant_logo width='132' height='40' fit='crop' }}"
+        alt="{{ restaurant_details:restaurant_logo:alt ?? restaurant_details:restaurant_name }}"
+        class="max-h-32 w-32 object-contain"
+        width="132"
+        height="40"
+        decoding="async"
+    />
+{{ else }}
+    <a
+        href="{{ href ?? '/' }}"
+        class="{{ class }} hover:text-brand text-xl font-semibold text-gray-950 uppercase transition-colors focus:outline-none lg:text-2xl"
+    >
+        {{ text }}
+    </a>
+{{ /if }}

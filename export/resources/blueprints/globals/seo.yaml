@@ -1,0 +1,97 @@
+title: 'SEO'
+tabs:
+  main:
+    display: 'SEO Settings'
+    sections:
+      -
+        display: "Global SEO"
+        fields:
+          -
+            handle: site_name
+            field:
+              type: text
+              display: "Site Name"
+              instructions: "The name of your website"
+              default: "Gustamic"
+          -
+            handle: site_description
+            field:
+              type: textarea
+              display: "Site Description"
+              instructions: "Default description for your website (used when pages don't have their own description)"
+              rows: 3
+          -
+            handle: site_keywords
+            field:
+              type: text
+              display: "Site Keywords"
+              instructions: "Comma-separated keywords relevant to your restaurant"
+      -
+        display: "Open Graph & Social Media"
+        fields:
+          -
+            handle: og_image
+            field:
+              type: assets
+              container: assets
+              max_files: 1
+              display: "Default OG Image"
+              instructions: "Default image for social media sharing (1200x630px recommended)"
+      -
+        display: "Search Engine Settings"
+        fields:
+          -
+            handle: robots_txt
+            field:
+              type: textarea
+              display: "Robots.txt Content"
+              instructions: "Custom robots.txt directives"
+              rows: 5
+          -
+            handle: google_analytics_id
+            field:
+              type: text
+              display: "Google Analytics ID"
+              instructions: "Your Google Analytics tracking ID (e.g., G-XXXXXXXXXX)"
+          -
+            handle: google_site_verification
+            field:
+              type: text
+              display: "Google Site Verification"
+              instructions: "Google Search Console verification code"
+      -
+        display: "Local Business Schema"
+        fields:
+          -
+            handle: business_type
+            field:
+              type: select
+              display: "Business Type"
+              instructions: "Type of restaurant for schema markup"
+              default: "Restaurant"
+              options:
+                Restaurant: "Restaurant"
+                Cafe: "Cafe"
+                FastFood: "Fast Food"
+                FineDining: "Fine Dining"
+                Bakery: "Bakery"
+                Bar: "Bar"
+          -
+            handle: price_range
+            field:
+              type: select
+              display: "Price Range"
+              instructions: "General price range for schema markup"
+              default: "$$"
+              options:
+                "$": "$ (Inexpensive)"
+                "$$": "$$ (Moderate)"
+                "$$$": "$$$ (Expensive)"
+                "$$$$": "$$$$ (Very Expensive)"
+          -
+            handle: accepts_reservations
+            field:
+              type: toggle
+              display: "Accepts Reservations"
+              instructions: "Whether your restaurant accepts reservations"
+              default: true

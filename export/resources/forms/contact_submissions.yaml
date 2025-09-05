@@ -1,0 +1,53 @@
+title: "Contact Submissions"
+honeypot: "preferred_date"
+store: true
+email:
+  - to: "{{ global:restaurant_details:email }}"
+    from: "{{ email }}"
+    reply_to: "{{ email }}"
+    subject: "New contact form submission from {{ name }}"
+    template: contact-notification
+fields:
+  - handle: name
+    field:
+      type: text
+      display: Name
+      validate:
+        - required
+  - handle: email
+    field:
+      type: text
+      input_type: email
+      display: Email
+      validate:
+        - required
+        - email
+  - handle: phone
+    field:
+      type: text
+      input_type: tel
+      display: Phone
+  - handle: preferred_date
+    field:
+      type: date
+      display: "Preferred Date"
+  - handle: preferred_time
+    field:
+      type: time
+      display: "Preferred Time"
+  - handle: message
+    field:
+      type: textarea
+      display: Message
+      validate:
+        - required
+actions:
+  - type: save
+    label: "Save submission"
+  - type: email
+    label: "Send notification email"
+    from: "{{ email }}"
+    reply_to: "{{ email }}"
+    html: email.contact-notification
+    values: true
+    attachments: false

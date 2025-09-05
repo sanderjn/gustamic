@@ -1,0 +1,141 @@
+title: 'Restaurant Details'
+tabs:
+  main:
+    display: 'Restaurant Details'
+    sections:
+      -
+        display: 'Restaurant Information'
+        fields:
+          -
+            handle: restaurant_name
+            field:
+              type: text
+              display: 'Restaurant Name'
+              instructions: 'Name of your restaurant'
+              validate:
+                - required
+          -
+            handle: restaurant_logo
+            field:
+              max_files: 1
+              container: assets
+              type: assets
+              display: 'Restaurant Logo (optional)'
+          -
+            handle: brand_color
+            field:
+              type: color
+              display: 'Brand Color'
+              default: '#0A0A0A'
+              width: 50
+              swatches:
+                - '#0A0A0A'
+                - '#2c3e50'
+                - '#8b4513'
+                - '#4a5568'
+                - '#d4472b'
+                - '#2d5016'
+                - '#b8860b'
+              instructions: 'Will be used for buttons. Will fallback to black if not set.'
+          -
+            handle: background_color
+            field:
+              swatches:
+                - '#fff0dd'
+                - '#f0ffdd'
+                - '#ddf0ff'
+                - '#f0ddff'
+                - '#ffdddd'
+                - '#ffffdd'
+              default: '#fff0dd'
+              type: color
+              display: 'Background color'
+              width: 50
+      -
+        display: 'Contact Information'
+        fields:
+          -
+            handle: address
+            field:
+              type: text
+              display: Address
+          -
+            handle: phone
+            field:
+              type: text
+              display: Phone
+              width: 50
+          -
+            handle: email
+            field:
+              type: text
+              display: Email
+              width: 50
+      -
+        display: 'Opening Hours'
+        fields:
+          -
+            handle: hours_text
+            field:
+              type: textarea
+              display: 'Opening Hours'
+              instructions: 'Enter your restaurant hours in any format you prefer'
+              rows: 8
+              default: |-
+                Monday - Thursday: 11:00 AM - 9:00 PM
+                Friday - Saturday: 11:00 AM - 10:00 PM
+                Sunday: 12:00 PM - 8:00 PM
+
+                Hours may vary during holidays. Please call ahead to confirm.
+      -
+        display: 'Social Links'
+        instructions: 'Add your social media URLs. Leave blank to hide the icon.'
+        fields:
+          -
+            handle: facebook_url
+            field:
+              type: text
+              display: 'Facebook URL'
+              width: 50
+          -
+            handle: instagram_url
+            field:
+              type: text
+              display: 'Instagram URL'
+              width: 50
+          -
+            handle: yelp_url
+            field:
+              type: text
+              display: 'Yelp URL'
+              width: 50
+          -
+            handle: tripadvisor_url
+            field:
+              type: text
+              display: 'TripAdvisor URL'
+              width: 50
+          -
+            handle: tiktok_url
+            field:
+              type: text
+              display: 'TikTok URL'
+              width: 50
+          -
+            handle: x_url
+            field:
+              type: text
+              display: 'X (Twitter) URL'
+              width: 50
+          -
+            handle: threads_url
+            field:
+              type: text
+              display: 'Threads URL'
+              width: 50
+          -
+            handle: bluesky_url
+            field:
+              type: text
+              display: 'Bluesky URL'
+              width: 50

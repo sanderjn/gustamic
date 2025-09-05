@@ -1,0 +1,68 @@
+<header
+    class="sticky top-0 z-50 border-b-2 border-black bg-[var(--background-color)]"
+    x-data="{ mobileMenuOpen: false }"
+>
+    <div class="container">
+        <div class="flex items-center justify-between py-3.5">
+            <!-- Logo -->
+            <div class="flex items-center">
+                {{ partial:components/logo text="{{ restaurant_details:restaurant_name ?? site:name }}" }}
+            </div>
+
+            <!-- Desktop Navigation -->
+            <div class="hidden lg:block">
+                <nav class="flex items-center space-x-8">
+                    {{ nav:main }}
+                        {{ partial:components/nav_link href="{{ url }}" title="{{ title }}" is_current="{{ is_current }}" variant="desktop" }}
+                    {{ /nav:main }}
+                    <!-- Reservation Button -->
+                    {{ if site_details:reservation_url }}
+                        {{ partial:components/button
+                            text="{{ site_details:reservation_button_text ?? 'Reserve a table' }}"
+                            href="{{ site_details:reservation_url }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            size="sm"
+                        }}
+                    {{ /if }}
+                </nav>
+            </div>
+
+            <!-- Mobile menu button -->
+            <div class="flex items-center lg:hidden">
+                {{ partial:components/mobile_menu_toggle }}
+            </div>
+        </div>
+
+        <!-- Mobile menu -->
+        <div
+            id="mobile-menu"
+            class="overflow-hidden will-change-transform lg:hidden"
+            x-collapse.duration.300ms
+            x-show="mobileMenuOpen"
+        >
+            <nav class="flex flex-col gap-4 pt-6">
+                {{ nav:main }}
+                    {{ partial:components/nav_link href="{{ url }}" title="{{ title }}" is_current="{{ is_current }}" variant="mobile" }}
+                {{ /nav:main }}
+            </nav>
+            <!-- Bottom spacing element -->
+            <div class="h-6"></div>
+        </div>
+    </div>
+</header>
+
+<!-- Mobile Reservation Button -->
+{{ if site_details:reservation_url }}
+<div class="fixed bottom-0 inset-x-0 px-4 py-2 bg-[var(--background-color)] border-t-2 border-black z-50 lg:hidden">
+    {{ partial:components/button
+        text="{{ site_details:reservation_button_text ?? 'Reserve a table' }}"
+        href="{{ site_details:reservation_url }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        size="md"
+        icon="true"
+        class="w-full"
+    }}
+</div>
+{{ /if }}

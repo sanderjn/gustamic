@@ -1,0 +1,41 @@
+{{#
+    @name Mobile Menu Toggle Component
+    @param {string} class - Additional CSS classes
+#}}
+
+<button
+    type="button"
+    class="{{ class }} relative flex items-center justify-center text-gray-950 focus:outline-none"
+    x-on:click="mobileMenuOpen = !mobileMenuOpen"
+    aria-label="Toggle mobile menu"
+>
+    <span class="absolute size-12"></span>
+    <svg
+        class="size-6 transition duration-300"
+        :class="{ 'translate-y-full opacity-0': mobileMenuOpen }"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+    >
+        <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"
+        />
+    </svg>
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        class="absolute inset-0 size-6 -translate-y-full opacity-0 transition duration-300"
+        :class="{ 'translate-y-0 opacity-100': mobileMenuOpen }"
+        x-cloak
+    >
+        <path
+            fill-rule="evenodd"
+            d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z"
+            clip-rule="evenodd"
+        />
+    </svg>
+</button>

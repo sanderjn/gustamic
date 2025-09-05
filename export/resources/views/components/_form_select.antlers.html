@@ -1,0 +1,41 @@
+{{#
+    @name Form Select Component
+    @param {string} id - Select ID
+    @param {string} name - Select name
+    @param {string} label - Select label
+    @param {string} required - Required field (true/false)
+    @param {string} value - Selected value
+    @param {array} options - Array of options with value and label
+    @param {string} placeholder - Placeholder option text
+    @param {string} class - Additional CSS classes
+#}}
+
+<div class="{{ class }}">
+    <label
+        for="{{ id }}"
+        class="mb-2 block text-sm font-semibold text-gray-950"
+    >
+        {{ label }}
+        {{ if !required }}
+            <span class="text-sm">(optional)</span>
+        {{ /if }}
+    </label>
+    <select
+        id="{{ id }}"
+        name="{{ name }}"
+        {{ if required }}required{{ /if }}
+        class="w-full border-2 border-gray-950 bg-transparent px-4 py-4 text-gray-950 transition-all duration-200 hover:bg-white/50 focus:border-gray-950 focus:bg-white/70 focus:outline-none"
+    >
+        {{ if placeholder }}
+            <option value="">{{ placeholder }}</option>
+        {{ /if }}
+        {{ options }}
+            <option
+                value="{{ value }}"
+                {{ parent:value == value ? "selected" : "" }}
+            >
+                {{ label }}
+            </option>
+        {{ /options }}
+    </select>
+</div>

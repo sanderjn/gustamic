@@ -1,0 +1,38 @@
+{{ partial:components/page_title }}
+<!-- Contact Form Section -->
+<section class="pb-16 lg:pb-24">
+    <div class="container">
+        {{ if contact_form_config:section_title || contact_form_config:section_subtitle }}
+            <div class="mb-12">
+                {{ if contact_form_config:section_title }}
+                    <h2
+                        class="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-950 sm:text-5xl"
+                    >
+                        {{ contact_form_config:section_title }}
+                    </h2>
+                {{ /if }}
+                {{ if contact_form_config:section_subtitle }}
+                    <p class="mt-6 max-w-2xl text-lg leading-8 text-gray-950">
+                        {{ contact_form_config:section_subtitle }}
+                    </p>
+                {{ /if }}
+            </div>
+        {{ /if }}
+        {{ partial:components/contact_form :contact_info_title="contact_form_config:contact_info_title" :form_title="contact_form_config:form_title" :show_contact_info="contact_form_config:show_contact_info" :form_fields="contact_form_config:form_fields" }}
+    </div>
+</section>
+
+<!-- Page Builder Content -->
+{{ if page_builder }}
+    {{ partial:page_builder }}
+{{ /if }}
+<!-- Additional Content -->
+{{ if content }}
+    <section class="py-16 lg:py-20">
+        <div class="container">
+            <div class="prose prose-lg mx-auto max-w-none">
+                {{ content | markdown }}
+            </div>
+        </div>
+    </section>
+{{ /if }}

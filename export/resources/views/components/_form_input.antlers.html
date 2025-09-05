@@ -1,0 +1,32 @@
+{{#
+    @name Form Input Component
+    @param {string} type - Input type (text, email, tel, date, time)
+    @param {string} id - Input ID
+    @param {string} name - Input name
+    @param {string} label - Input label
+    @param {string} required - Required field (true/false)
+    @param {string} placeholder - Placeholder text
+    @param {string} value - Input value
+    @param {string} class - Additional CSS classes
+#}}
+
+<div class="{{ class }}">
+    <label
+        for="{{ id }}"
+        class="mb-2 block text-sm font-semibold text-gray-950"
+    >
+        {{ label }}
+        {{ if !required }}
+            (optional)
+        {{ /if }}
+    </label>
+    <input
+        type="{{ type ?? 'text' }}"
+        id="{{ id }}"
+        name="{{ name }}"
+        {{ if required }}required{{ /if }}
+        class="w-full border-2 border-gray-950 bg-transparent px-4 py-3 text-gray-950 placeholder-gray-500 transition-all duration-200 hover:bg-white/50 focus:border-gray-950 focus:bg-white/70 focus:outline-none"
+        {{ if value }}value="{{ value }}"{{ /if }}
+        {{ if placeholder }}placeholder="{{ placeholder }}"{{ /if }}
+    />
+</div>

@@ -1,0 +1,147 @@
+title: Page
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              validate:
+                - required
+          -
+            handle: subtitle
+            field:
+              type: text
+              display: 'Page Subtitle'
+              instructions: 'Subtitle displayed below the main title'
+              if:
+                template: 'contains_any page_templates/contact, page_templates/menu'
+      -
+        fields:
+          -
+            handle: contact_form_config
+            field:
+              type: group
+              display: 'Contact Form Configuration'
+              instructions: 'Configure the contact form settings'
+              if:
+                template: 'equals page_templates/contact'
+              fields:
+                -
+                  handle: section_title
+                  field:
+                    type: text
+                    display: 'Contact Section Title'
+                    instructions: 'Main title for the contact form section (leave empty to hide)'
+                -
+                  handle: section_subtitle
+                  field:
+                    type: text
+                    display: 'Contact Section Subtitle'
+                    instructions: 'Subtitle for the contact form section (leave empty to hide)'
+                -
+                  import: contact_form_config
+      -
+        display: 'Page Builder'
+        fields:
+          -
+            import: page_builder
+  seo:
+    display: SEO
+    sections:
+      -
+        display: 'Search Engine Optimization'
+        fields:
+          -
+            handle: seo_description
+            field:
+              type: textarea
+              display: 'Meta Description'
+              instructions: 'Custom description for this page (overrides global default)'
+              rows: 3
+              validate: 'max:160'
+          -
+            handle: seo_keywords
+            field:
+              type: text
+              display: Keywords
+              instructions: 'Comma-separated keywords specific to this page'
+          -
+            handle: seo_title
+            field:
+              type: text
+              display: 'Meta Title'
+              instructions: 'Custom title for search engines (overrides page title)'
+              validate: 'max:60'
+          -
+            handle: og_title
+            field:
+              type: text
+              display: 'Open Graph Title'
+              instructions: 'Title for social media sharing (defaults to meta title or page title)'
+          -
+            handle: og_description
+            field:
+              type: textarea
+              display: 'Open Graph Description'
+              instructions: 'Description for social media sharing (defaults to meta description)'
+              rows: 3
+          -
+            handle: og_image
+            field:
+              type: assets
+              container: assets
+              max_files: 1
+              display: 'Open Graph Image'
+              instructions: 'Image for social media sharing (1200x630px recommended)'
+          -
+            handle: robots
+            field:
+              type: select
+              display: 'Search Engine Visibility'
+              instructions: 'How search engines should handle this page'
+              default: 'index, follow'
+              options:
+                'index, follow': 'Index and Follow (Default)'
+                'noindex, follow': "Don't Index, Follow Links"
+                'index, nofollow': "Index, Don't Follow Links"
+                'noindex, nofollow': "Don't Index, Don't Follow Links"
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        fields:
+          -
+            handle: author
+            field:
+              type: users
+              display: Author
+              default: current
+              localizable: true
+              max_items: 1
+          -
+            handle: slug
+            field:
+              type: slug
+              localizable: true
+              validate: 'max:200'
+          -
+            handle: parent
+            field:
+              type: entries
+              collections:
+                - pages
+              max_items: 1
+              listable: false
+              localizable: true
+          -
+            handle: template
+            field:
+              type: template
+              display: Template
+              localizable: true
+              folder: page_templates

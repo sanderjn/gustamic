@@ -1,0 +1,33 @@
+sections:
+  main:
+    display: Main
+    fields:
+      -
+        handle: title
+        field:
+          type: text
+          required: true
+          input_type: text
+          antlers: false
+          display: Category Name
+          validate:
+            - required
+          instructions: 'Name of the menu category (e.g., Appetizers, Main Courses, Desserts)'
+      -
+        handle: description
+        field:
+          type: textarea
+          required: false
+          antlers: false
+          display: Description
+          instructions: 'Optional description of this menu category'
+          rows: 2
+      -
+        handle: sort_order
+        field:
+          type: integer
+          required: false
+          display: Sort Order
+          instructions: 'Order for displaying categories (lower numbers appear first)'
+          default: 0
+title: 'Menu Category'

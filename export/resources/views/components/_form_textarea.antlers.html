@@ -1,0 +1,33 @@
+{{#
+    @name Form Textarea Component
+    @param {string} id - Textarea ID
+    @param {string} name - Textarea name
+    @param {string} label - Textarea label
+    @param {string} required - Required field (true/false)
+    @param {string} placeholder - Placeholder text
+    @param {string} value - Textarea value
+    @param {string} rows - Number of rows
+    @param {string} class - Additional CSS classes
+#}}
+
+<div class="{{ class }}">
+    <label
+        for="{{ id }}"
+        class="mb-2 block text-sm font-semibold text-gray-950"
+    >
+        {{ label }}
+        {{ if !required }}
+            (optional)
+        {{ /if }}
+    </label>
+    <textarea
+        id="{{ id }}"
+        name="{{ name }}"
+        rows="{{ rows ?? '6' }}"
+        {{ if required }}required{{ /if }}
+        class="w-full resize-none border-2 border-gray-950 bg-transparent px-4 py-4 text-gray-950 placeholder-gray-500 transition-all duration-200 hover:bg-white/50 focus:border-gray-950 focus:bg-white/70 focus:outline-none"
+        {{ if placeholder }}placeholder="{{ placeholder }}"{{ /if }}
+    >
+{{ value }}</textarea
+    >
+</div>

@@ -1,0 +1,23 @@
+{
+    "name": "sanderjn/gustamic",
+    "type": "statamic-starter-kit",
+    "description": "A specialized Statamic starter kit designed for restaurant websites",
+    "keywords": ["statamic", "starter-kit", "restaurant", "food", "menu"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sander",
+            "email": "your-email@example.com"
+        }
+    ],
+    "extra": {
+        "statamic": {
+            "name": "Gustamic",
+            "description": "A modern, minimal Statamic starter kit designed specifically for restaurant websites. Features menu management, contact forms, reservation systems, and customizable design elements."
+        }
+    },
+    "require": {
+        "php": "^8.2",
+        "statamic/cms": "^5.0"
+    }
+}

@@ -1,0 +1,68 @@
+sections:
+  main:
+    display: Main
+    fields:
+      -
+        handle: title
+        field:
+          type: text
+          required: true
+          validate:
+            - required
+      -
+        handle: intro
+        field:
+          type: textarea
+          display: Intro
+          instructions: 'Brief introduction or subtitle for the page'
+      -
+        handle: template
+        field:
+          type: template
+          folder: pages
+          default: home
+  page_builder:
+    display: 'Page Builder'
+    fields:
+      -
+        handle: page_builder
+        field:
+          type: replicator
+          display: 'Page Builder'
+          instructions: 'Add sections to build your page content'
+          sets:
+            hero:
+              display: 'Hero Section'
+              fields:
+                title:
+                  type: text
+                  display: Title
+                  required: true
+                subtitle:
+                  type: textarea
+                  display: Subtitle
+                cta_text:
+                  type: text
+                  display: 'CTA Text'
+                cta_url:
+                  type: text
+                  display: 'CTA URL'
+            content:
+              display: 'Content Section'
+              fields:
+                title:
+                  type: text
+                  display: 'Section Title'
+                content:
+                  type: markdown
+                  display: Content
+                  required: true
+  content:
+    display: Content
+    fields:
+      -
+        handle: content
+        field:
+          type: markdown
+          localizable: true
+          instructions: 'Additional content that appears after the page builder sections'

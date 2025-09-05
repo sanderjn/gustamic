@@ -1,0 +1,31 @@
+<section id="menu" class="py-16 lg:py-24">
+    <div class="container">
+        <h2
+            class="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-950 sm:text-5xl"
+        >
+            {{ title }}
+        </h2>
+
+        {{# Featured Menu Items #}}
+        <div class="mt-20">
+            {{ collection:menu_items featured:is="true" as="featured_items" limit="{{ total_items ?? 6 }}" }}
+                {{ if (featured_items | count) > 0 }}
+                    <div
+                        class="grid grid-cols-1 items-start gap-16 md:grid-cols-2"
+                    >
+                        {{ featured_items }}
+                            {{ partial:components/menu_item_card title="{{ title }}" description="{{ description }}" price="{{ price }}" featured="{{ featured }}" }}
+                        {{ /featured_items }}
+                    </div>
+                {{ else }}
+                    <p class="text-gray-950">
+                        No featured menu items selected yet.
+                    </p>
+                {{ /if }}
+            {{ /collection:menu_items }}
+        </div>
+        <div class="mt-16">
+            {{ partial:components/button size="md" icon="true" variant="outline" text="View full menu" href="/menu" }}
+        </div>
+    </div>
+</section>

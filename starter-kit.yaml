@@ -1,0 +1,27 @@
+updatable: false
+export_paths:
+  - config/statamic
+  - content
+  - lang
+  - resources/blueprints
+  - resources/css
+  - resources/fieldsets
+  - resources/forms
+  - resources/js
+  - resources/views
+  - public/assets
+  - app
+  - routes/web.php
+  - vite.config.js
+  - package.json
+dependencies:
+  moneyphp/money: ^4.7
+modules:
+  sample_content:
+    prompt: 'Would you like to install sample content including menu items and pages?'
+    export_paths:
+      - content/collections/pages
+      - content/collections/menu_items
+      - content/taxonomies
+      - content/globals
+      - content/navigation

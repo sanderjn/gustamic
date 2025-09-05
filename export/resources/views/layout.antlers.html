@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="{{ site:short_locale }}" class="scroll-smooth scroll-pt-24">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>
+            {{ restaurant_details:restaurant_name ?? site:name }}
+        </title>
+        <meta
+            name="description"
+            content="{{ seo_description ?? site_details:site_description ?? restaurant_details:about_description ?? site:description }}"
+        />
+        <meta
+            name="keywords"
+            content="{{ seo_keywords ?? site_details:site_keywords }}"
+        />
+        <meta name="robots" content="{{ robots ?? 'index, follow' }}" />
+
+        <!-- Open Graph Meta Tags -->
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="{{ site:locale }}" />
+        <meta
+            property="og:site_name"
+            content="{{ site_details:site_name ?? restaurant_details:restaurant_name ?? site:name }}"
+        />
+        <meta property="og:url" content="{{ permalink }}" />
+        <meta
+            property="og:title"
+            content="{{ og_title ?? seo_title ?? title ?? site_details:site_name ?? restaurant_details:restaurant_name ?? site:name }}"
+        />
+        <meta
+            property="og:description"
+            content="{{ og_description ?? seo_description ?? site_details:site_description ?? restaurant_details:about_description ?? site:description }}"
+        />
+        {{ if og_image }}
+            <meta property="og:image" content="{{ og_image }}" />
+        {{ else }}
+            <meta property="og:image" content="{{ site_details:og_image }}" />
+        {{ /if }}
+        <!-- Twitter Card Meta Tags -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+            name="twitter:title"
+            content="{{ og_title ?? seo_title ?? title ?? site_details:site_name ?? restaurant_details:restaurant_name ?? site:name }}"
+        />
+        <meta
+            name="twitter:description"
+            content="{{ og_description ?? seo_description ?? site_details:site_description ?? restaurant_details:about_description }}"
+        />
+        {{ if twitter_summary_image }}
+            <meta name="twitter:image" content="{{ twitter_summary_image }}" />
+        {{ elseif og_image }}
+            <meta name="twitter:image" content="{{ og_image }}" />
+        {{ else }}
+            <meta name="twitter:image" content="{{ site_details:og_image }}" />
+        {{ /if }}
+        {{ if restaurant_details:x_url }}
+            <meta name="twitter:site" content="{{ restaurant_details:x_url }}" />
+        {{ /if }}
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="canonical" href="{{ permalink }}" />
+
+        <!-- Dynamic Brand Color CSS Variables -->
+        {{#
+            {{ if restaurant_details:brand_color }}
+                <style>
+                    :root {
+                        --brand-color: {{ restaurant_details:brand_color }};
+                    }
+                </style>
+            {{ /if }}
+        #}}
+        {{ vite src="resources/js/site.js|resources/css/site.css" }}
+        <!-- Google Fonts with font-display: swap for better CLS -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Bangers&family=Chewy&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
+            rel="stylesheet"
+        />
+        
+        <!-- Preload critical font weights to minimize CLS -->
+        <link rel="preload" href="https://fonts.gstatic.com/s/plusjakartasans/v7/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko20yygg_vJ.woff2" as="font" type="font/woff2" crossorigin />
+
+        <style>
+            :root {
+                --brand-color: {{ restaurant_details:brand_color ?? '#0A0A0A' }};
+                --background-color: {{ restaurant_details:background_color ?? '#FFF8EF' }};
+            }
+        </style>
+
+        <!-- Structured Data -->
+        <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@type": "Restaurant",
+              "name": "{{ restaurant_details:restaurant_name ?? site:name }}",
+              "description": "{{ site_details:site_description ?? restaurant_details:about_description }}",
+              "url": "{{ config:app:url }}",
+              "telephone": "{{ restaurant_details:phone }}",
+              "email": "{{ restaurant_details:email }}",
+              {{ if restaurant_details:address }}
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "{{ restaurant_details:address }}"
+              },
+              {{ /if }}
+              "servesCuisine": "Italian",
+              {{ if site_details:reservation_url }}
+              "potentialAction": {
+                "@type": "ReserveAction",
+                "target": {
+                  "@type": "EntryPoint",
+                  "urlTemplate": "{{ site_details:reservation_url }}",
+                  "inLanguage": "en-US",
+                  "actionPlatform": [
+                    "http://schema.org/DesktopWebPlatform",
+                    "http://schema.org/IOSPlatform",
+                    "http://schema.org/AndroidPlatform"
+                  ]
+                }
+              },
+              {{ /if }}
+              "sameAs": []
+            }
+        </script>
+
+        <!-- Custom Head Scripts -->
+        {{ if site_details:head_scripts }}
+            {{ { site_details:head_scripts } }}
+        {{ /if }}
+    </head>
+    <body
+        x-data="{ isMobileMenuOpen: false }"
+        class="bg-[var(--background-color)] font-sans antialiased"
+    >
+        <div class="flex min-h-screen flex-col">
+            {{ partial:header }}
+            <main class="flex-grow">
+                {{ template_content }}
+            </main>
+            {{ partial:footer }}
+        </div>
+
+        <!-- Custom Body Scripts -->
+        {{ if site_details:body_scripts }}
+            {{ { site_details:body_scripts } }}
+        {{ /if }}
+    </body>
+</html>

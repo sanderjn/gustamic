@@ -1,0 +1,86 @@
+{{#
+    @name Primary CTA Button
+    @description Primary CTA Button Component
+    @param {string} text - Button text
+    @param {string} href - Button URL
+    @param {string} target - Link target (_blank, _self)
+    @param {string} rel - Link relationship (noopener noreferrer)
+    @param {string} variant - Button style (regular, outline)
+    @param {string} size - Button size (sm, md, lg)
+    @param {string} class - Additional CSS classes
+    @param {string} icon - Show arrow icon (true/false)
+#}}
+{{ if size == 'sm' }}
+    {{ size_classes = 'px-4 py-2 gap-2 text-base' }}
+{{ elseif size == 'lg' }}
+    {{ size_classes = 'px-10 py-5 gap-4 text-lg' }}
+{{ else }}
+    {{ size_classes = 'px-6 py-3 gap-2 text-lg' }}
+{{ /if }}
+{{ rounded_class = 'rounded-full' }}
+{{ shadow_class = 'hover:shadow-' + (size == 'lg' ? '3xl' : 'xl') }}
+{{ if variant == 'outline' }}
+    {{ variant_classes = 'text-gray-950 bg-transparent border-2 border-gray-950' }}
+{{ else }}
+    {{ variant_classes = 'bg-brand text-[var(--background-color)] focus:outline-brand focus:outline-2 focus:outline-offset-2' }}
+{{ /if }}
+{{ base_classes = 'relative inline-flex items-center justify-center font-semibold uppercase group overflow-hidden' }}
+{{ if href }}
+    <a
+        href="{{ href }}"
+        {{ if target }}target="{{ target }}"{{ /if }}
+        {{ if rel }}rel="{{ rel }}"{{ /if }}
+        class="{{ base_classes }} {{ variant_classes }} {{ size_classes }} {{ rounded_class }} {{ shadow_class }} {{ class }} transition-transform duration-300 will-change-transform hover:scale-[97%]"
+    >
+        <span
+            class="{{ variant == 'outline' ? 'bg-white' : 'bg-gray-950' }} absolute inset-0 origin-left scale-x-0 transform transition-transform duration-300 will-change-transform group-hover:scale-x-100"
+        ></span>
+        <span
+            class="{{ variant == 'outline' ? 'group-hover:text-gray-950' : 'group-hover:text-white' }} relative z-10"
+        >
+            {{ text }}
+        </span>
+        {{ if icon }}
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                class="{{ variant == 'outline' ? 'group-hover:text-gray-950' : 'group-hover:text-white' }} relative z-10 size-6"
+            >
+                <path
+                    fill-rule="evenodd"
+                    d="M5.22 14.78a.75.75 0 0 0 1.06 0l7.22-7.22v5.69a.75.75 0 0 0 1.5 0v-7.5a.75.75 0 0 0-.75-.75h-7.5a.75.75 0 0 0 0 1.5h5.69l-7.22 7.22a.75.75 0 0 0 0 1.06Z"
+                    clip-rule="evenodd"
+                />
+            </svg>
+        {{ /if }}
+    </a>
+{{ else }}
+    <button
+        type="{{ type ?? 'button' }}"
+        class="{{ base_classes }} {{ variant_classes }} {{ size_classes }} {{ rounded_class }} {{ shadow_class }} {{ class }}"
+    >
+        <span
+            class="{{ variant == 'outline' ? 'bg-white' : 'bg-gray-950' }} absolute inset-0 origin-left scale-x-0 transform transition-transform duration-300 will-change-transform group-hover:scale-x-100"
+        ></span>
+        <span
+            class="{{ variant == 'outline' ? 'group-hover:text-gray-950' : 'group-hover:text-white' }} relative z-10"
+        >
+            {{ text }}
+        </span>
+        {{ if icon }}
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                class="{{ variant == 'outline' ? 'group-hover:text-gray-950' : 'group-hover:text-white' }} relative z-10 size-6"
+            >
+                <path
+                    fill-rule="evenodd"
+                    d="M5.22 14.78a.75.75 0 0 0 1.06 0l7.22-7.22v5.69a.75.75 0 0 0 1.5 0v-7.5a.75.75 0 0 0-.75-.75h-7.5a.75.75 0 0 0 0 1.5h5.69l-7.22 7.22a.75.75 0 0 0 0 1.06Z"
+                    clip-rule="evenodd"
+                />
+            </svg>
+        {{ /if }}
+    </button>
+{{ /if }}

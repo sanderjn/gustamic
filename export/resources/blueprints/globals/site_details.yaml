@@ -1,0 +1,158 @@
+title: 'Site Details'
+tabs:
+  main:
+    display: 'Site Details'
+    sections:
+      -
+        display: 'Site settings'
+        fields:
+          -
+            handle: currency
+            field:
+              type: select
+              display: Currency
+              instructions: "Select your restaurant's currency for menu pricing"
+              default: USD
+              options:
+                USD: 'US Dollar ($)'
+                EUR: 'Euro (€)'
+                GBP: 'British Pound (£)'
+                CAD: 'Canadian Dollar ($)'
+                AUD: 'Australian Dollar ($)'
+                JPY: 'Japanese Yen (¥)'
+                CHF: 'Swiss Franc (Fr.)'
+                SEK: 'Swedish Krona (kr)'
+                NOK: 'Norwegian Krone (kr)'
+                DKK: 'Danish Krone (kr)'
+                PLN: 'Polish Zloty (zł)'
+                CZK: 'Czech Koruna (Kč)'
+                HUF: 'Hungarian Forint (Ft)'
+                RON: 'Romanian Leu (lei)'
+                BGN: 'Bulgarian Lev (лв)'
+                HRK: 'Croatian Kuna (kn)'
+                RSD: 'Serbian Dinar (дин)'
+                TRY: 'Turkish Lira (₺)'
+                UAH: 'Ukrainian Hryvnia (₴)'
+                BRL: 'Brazilian Real (R$)'
+                MXN: 'Mexican Peso ($)'
+                ARS: 'Argentine Peso ($)'
+                CLP: 'Chilean Peso ($)'
+                COP: 'Colombian Peso ($)'
+                PEN: 'Peruvian Sol (S/)'
+                CNY: 'Chinese Yuan (¥)'
+                INR: 'Indian Rupee (₹)'
+                KRW: 'South Korean Won (₩)'
+                THB: 'Thai Baht (฿)'
+                VND: 'Vietnamese Dong (₫)'
+                PHP: 'Philippine Peso (₱)'
+                IDR: 'Indonesian Rupiah (Rp)'
+                MYR: 'Malaysian Ringgit (RM)'
+                SGD: 'Singapore Dollar ($)'
+                HKD: 'Hong Kong Dollar ($)'
+                TWD: 'Taiwan Dollar ($)'
+                NZD: 'New Zealand Dollar ($)'
+                ZAR: 'South African Rand (R)'
+                EGP: 'Egyptian Pound (£)'
+                MAD: 'Moroccan Dirham (د.م.)'
+                NGN: 'Nigerian Naira (₦)'
+                KES: 'Kenyan Shilling (Sh)'
+                ILS: 'Israeli New Shekel (₪)'
+                AED: 'UAE Dirham (د.إ)'
+                SAR: 'Saudi Riyal (ر.س)'
+                QAR: 'Qatari Riyal (ر.ق)'
+                KWD: 'Kuwaiti Dinar (د.ك)'
+                BHD: 'Bahraini Dinar (ب.د)'
+                OMR: 'Omani Rial (ر.ع.)'
+                JOD: 'Jordanian Dinar (د.ا)'
+                LBP: 'Lebanese Pound (ل.ل.)'
+          -
+            handle: show_currency_symbol
+            field:
+              type: toggle
+              display: 'Show Currency Symbol'
+              instructions: 'Display currency symbols (e.g., $, €, £) with menu prices'
+              default: true
+      -
+        display: 'Reservations & Bookings'
+        fields:
+          -
+            handle: reservation_url
+            field:
+              type: text
+              display: 'Reservation URL'
+              instructions: 'Link to your reservation system. Use external URLs (e.g., https://opentable.com/...) or internal pages (e.g., /contact). External links open in a new tab.'
+          -
+            handle: reservation_button_text
+            field:
+              type: text
+              display: 'Reservation Button Text'
+              instructions: 'Text for reservation buttons throughout the site'
+              placeholder: 'Make a Reservation'
+      -
+        display: 'Footer Settings'
+        fields:
+          -
+            handle: footer_cta_title
+            field:
+              type: text
+              display: 'Footer Title'
+          -
+            handle: footer_description
+            field:
+              type: textarea
+              display: 'Footer Description'
+              instructions: 'Custom description text for the footer section'
+              rows: 3
+          -
+            handle: show_menu_category
+            field:
+              type: toggle
+              display: 'Show menu categories'
+              default: true
+          -
+            handle: footer_image
+            field:
+              max_files: 1
+              container: assets
+              type: assets
+              display: 'Footer Image'
+      -
+        display: Copyright
+        fields:
+          -
+            handle: copyright_name
+            field:
+              type: text
+              display: 'Copyright name'
+              instructions: 'Uses the application name as a fallback.'
+              width: 50
+          -
+            handle: copyright_since
+            field:
+              prepend: ©
+              type: integer
+              display: 'Copyright since'
+              width: 50
+          -
+            handle: copyright_text
+            field:
+              type: text
+              display: 'Copyright text'
+              instructions: 'Uses "All rights reserved" as fallback.'
+      -
+        display: 'Third-party Scripts'
+        fields:
+          -
+            handle: head_scripts
+            field:
+              type: textarea
+              display: 'Head Scripts'
+              instructions: 'Scripts to include in the <head> section (analytics, tracking, etc.)'
+              rows: 5
+          -
+            handle: body_scripts
+            field:
+              type: textarea
+              display: 'Body Scripts'
+              instructions: 'Scripts to include before closing </body> tag'
+              rows: 5

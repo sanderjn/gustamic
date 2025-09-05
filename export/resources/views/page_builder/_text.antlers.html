@@ -1,0 +1,62 @@
+<div class="border-b-2 border-black pt-16 pb-24 lg:pt-24 lg:pb-32">
+    <div class="container">
+        {{ if title }}
+            <h1
+                class="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-950 sm:text-5xl"
+            >
+                {{ title }}
+            </h1>
+        {{ /if }}
+        <div
+            class="mt-10 grid max-w-xl grid-cols-1 gap-24 lg:max-w-none lg:grid-cols-2"
+        >
+            {{ if text_column_1 }}
+                <div class="prose prose-xl lg:prose-2xl font-medium">
+                    {{ text_column_1 | markdown }}
+                    {{ if button_text && button_link }}
+                        <div class="not-prose mt-16 flex">
+                            {{ partial:components/button href="{button_link}" text="{button_text}" variant="outline" size="md" icon="true" }}
+                        </div>
+                    {{ /if }}
+                    {{ if image }}
+                        <div
+                            class="mt-16 translate-y-24 transform opacity-0 transition-all delay-200 duration-700 ease-out will-change-transform lg:mt-32"
+                            x-data
+                            x-intersect.once="$el.classList.add('animate-fade-in-up')"
+                        >
+                            <img
+                                class="!my-0 h-full w-full object-cover"
+                                src="{{ glide:image width='600' }}"
+                                alt="{{ image:alt ?? title ?? 'Content image' }}"
+                                loading="lazy"
+                                width="{{ image:width }}"
+                                height="{{ image:height }}"
+                            />
+                        </div>
+                    {{ /if }}
+                </div>
+            {{ /if }}
+            {{ if text_column_2 }}
+                <div class="prose prose-lg lg:prose-xl font-medium">
+                    {{ text_column_2 | markdown }}
+                    {{ if secondary_image }}
+                        <div
+                            class="mt-16 translate-y-24 transform opacity-0 transition-all delay-200 duration-700 ease-out will-change-transform lg:mt-32"
+                            x-data
+                            x-intersect.once="$el.classList.add('animate-fade-in-up')"
+                        >
+                            <img
+                                class="!my-0 h-full w-full object-cover"
+                                src="{{ glide:secondary_image width='600' }}"
+                                alt="{{ secondary_image:alt ?? title ?? 'Secondary content image' }}"
+                                loading="lazy"
+                                width="{{ secondary_image:width }}"
+                                height="{{ secondary_image:height }}"
+                            />
+                        </div>
+                    {{ /if }}
+                </div>
+            {{ /if }}
+        </div>
+    </div>
+</div>

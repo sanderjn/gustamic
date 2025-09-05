@@ -1,0 +1,36 @@
+title: 'Menu Category'
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: title
+            field:
+              type: text
+              required: true
+              display: Title
+              validate:
+                - required
+  sidebar:
+    display: Sidebar
+    sections:
+      -
+        fields:
+          -
+            handle: slug
+            field:
+              type: slug
+              required: true
+              validate:
+                - required
+                - 'max:200'
+              localizable: true
+          -
+            handle: sort_order
+            field:
+              type: integer
+              display: 'Sort Order'
+              instructions: 'Order in which categories appear (lower numbers first)'
+              default: 0

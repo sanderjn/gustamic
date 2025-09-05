@@ -1,0 +1,20 @@
+{{#
+    @name Navigation Link Component
+    @param {string} href - Link URL
+    @param {string} title - Link text
+    @param {string} is_current - Current page indicator (true/false)
+    @param {string} variant - Link style (desktop, mobile)
+    @param {string} class - Additional CSS classes
+#}}
+
+<a
+    href="{{ href }}"
+    class="{{ class }} {{ variant == 'mobile' ? 'py-2 text-xl' : 'relative group py-1' }} font-semibold uppercase"
+>
+    {{ title }}
+    {{ if variant != 'mobile' }}
+        <span
+            class="{{ is_current ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100' }} absolute inset-x-0 bottom-0 h-0.5 origin-left transform bg-gray-950 transition-transform duration-300 will-change-transform"
+        ></span>
+    {{ /if }}
+</a>

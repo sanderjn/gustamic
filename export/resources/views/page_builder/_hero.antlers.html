@@ -1,0 +1,30 @@
+<div class="border-b-2 border-black pt-12 pb-24 lg:pb-32">
+    <div class="container">
+        <div class="-ml-3">
+            <h1
+                id="hero-title"
+                class="min-h-[3rem] text-9xl leading-none font-medium tracking-tight text-pretty text-gray-950 uppercase sm:min-h-[4rem] md:min-h-[5rem] lg:min-h-[6rem] xl:min-h-[8rem]"
+            >
+                {{ title }}
+            </h1>
+        </div>
+        {{ if subtitle }}
+            <div class="mt-8 max-w-lg">
+                <p
+                    class="text-lg font-medium text-pretty text-gray-950 sm:text-xl"
+                >
+                    {{ subtitle }}
+                </p>
+            </div>
+        {{ /if }}
+        <div class="mt-12 aspect-video">
+            <img
+                class="h-full w-full object-cover"
+                src="{{ glide:image }}"
+                alt="{{ image:alt }}"
+                width="1920"
+                height="1080"
+            />
+        </div>
+    </div>
+</div>

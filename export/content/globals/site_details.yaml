@@ -1,0 +1,12 @@
+title: 'Site Details'
+data:
+  currency: USD
+  show_currency_symbol: true
+  reservation_url: '#'
+  reservation_button_text: 'Make a Reservation'
+  footer_cta_title: 'Reserve a table'
+  footer_description: 'We keep the music low enough to hear each other, the lighting soft enough to look good, and the food interesting enough to fill any awkward pauses.'
+  show_menu_category: true
+  footer_image: seafood-risotto.jpg
+  copyright_since: 2020
+  copyright_text: 'Hope to see you soon.'

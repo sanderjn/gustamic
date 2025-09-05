@@ -1,0 +1,190 @@
+<footer class="border-t-2 border-black">
+    <div class="container pt-16 pb-24 lg:pt-24">
+        <div class="grid gap-16 lg:grid-cols-2">
+            <div>
+                <h2
+                    class="text-4xl font-semibold tracking-tight text-pretty sm:text-5xl"
+                >
+                    {{ site_details:footer_cta_title ?? restaurant_details:restaurant_name }}
+                </h2>
+                <p
+                    class="mt-10 max-w-md text-lg font-medium text-pretty text-gray-950"
+                >
+                    {{ site_details:footer_description ?? restaurant_details:about_description }}
+                </p>
+                {{ if site_details:reservation_url }}
+                    <div class="mt-8 lg:mt-16">
+                        {{ if site_details:reservation_url | starts_with('http') }}
+                            {{ partial:components/button target="_blank" rel="noopener noreferrer" size="lg" icon="true" text="{site_details:reservation_button_text}" href="{site_details:reservation_url}" }}
+                        {{ else }}
+                            {{ partial:components/button size="lg" icon="true" text="{site_details:reservation_button_text}" href="{site_details:reservation_url}" }}
+                        {{ /if }}
+                    </div>
+                {{ /if }}
+            </div>
+            <img
+                class="w-full translate-y-24 transform opacity-0 transition-all duration-700 ease-out will-change-transform"
+                x-data
+                x-intersect.once="$el.classList.add('animate-fade-in-up')"
+                src="{{ glide:site_details:footer_image width='576' }}"
+                alt="{{ site_details:footer_image:alt ?? 'Restaurant image' }}"
+                width="576"
+                height="432"
+                loading="lazy"
+                decoding="async"
+            />
+        </div>
+        <div
+            class="mt-16 grid grid-cols-1 gap-12 border-t border-white/10 sm:grid-cols-2 lg:mt-24 lg:grid-cols-4 lg:gap-16"
+        >
+            <div>
+                <h3 class="text-xl font-semibold uppercase">
+                    {{ restaurant_details:restaurant_name }}
+                </h3>
+            </div>
+            {{ if site_details:show_menu_category }}
+                <div>
+                    <h3 class="text-lg font-bold">Our Menu</h3>
+                    <ul role="list" class="mt-6 space-y-4">
+                        {{ taxonomy:menu_category sort="sort_order:asc" }}
+                            <li>
+                                <a
+                                    href="/menu#{{ slug }}"
+                                    class="hover-underline inline-block font-medium text-gray-950 transition-colors"
+                                >
+                                    {{ title }}
+                                </a>
+                            </li>
+                        {{ /taxonomy:menu_category }}
+                    </ul>
+                </div>
+            {{ /if }}
+            <div>
+                <h3 class="text-lg font-bold">Contact</h3>
+                <div class="mt-6 space-y-4 font-medium text-gray-950">
+                    {{ partial:components/contact_info address="{restaurant_details:address}" phone="{restaurant_details:phone}" email="{restaurant_details:email}" }}
+                </div>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold">Opening Hours</h3>
+                {{ if restaurant_details:hours_text }}
+                    <p class="mt-6 font-medium text-gray-950">
+                        {{ restaurant_details:hours_text | nl2br }}
+                    </p>
+                {{ /if }}
+            </div>
+        </div>
+        <div
+            class="mt-16 border-t border-white/10 md:flex md:items-center md:justify-between lg:mt-24"
+        >
+            <div class="flex flex-wrap items-center gap-6 md:order-2">
+                {{ if restaurant_details:facebook_url }}
+                    <a
+                        href="{{ restaurant_details:facebook_url }}"
+                        class="relative flex items-center justify-center text-gray-950 transition-transform hover:scale-90"
+                    >
+                        <span
+                            class="absolute size-12 [@media(pointer:fine)]:hidden"
+                        ></span>
+                        <span class="sr-only">Facebook</span>
+                        {{ partial:components/icons/social/facebook class="size-6" }}
+                    </a>
+                {{ /if }}
+                {{ if restaurant_details:instagram_url }}
+                    <a
+                        href="{{ restaurant_details:instagram_url }}"
+                        class="relative flex items-center justify-center text-gray-950 transition-transform hover:scale-90"
+                    >
+                        <span
+                            class="absolute size-12 [@media(pointer:fine)]:hidden"
+                        ></span>
+                        <span class="sr-only">Instagram</span>
+                        {{ partial:components/icons/social/instagram class="size-6" }}
+                    </a>
+                {{ /if }}
+                {{ if restaurant_details:yelp_url }}
+                    <a
+                        href="{{ restaurant_details:yelp_url }}"
+                        class="relative flex items-center justify-center text-gray-950 transition-transform hover:scale-90"
+                    >
+                        <span
+                            class="absolute size-12 [@media(pointer:fine)]:hidden"
+                        ></span>
+                        <span class="sr-only">Yelp</span>
+                        {{ partial:components/icons/social/yelp class="size-6" }}
+                    </a>
+                {{ /if }}
+                {{ if restaurant_details:tripadvisor_url }}
+                    <a
+                        href="{{ restaurant_details:tripadvisor_url }}"
+                        class="relative flex items-center justify-center text-gray-950 transition-transform hover:scale-90"
+                    >
+                        <span
+                            class="absolute size-12 [@media(pointer:fine)]:hidden"
+                        ></span>
+                        <span class="sr-only">TripAdvisor</span>
+                        {{ partial:components/icons/social/tripadvisor class="size-6" }}
+                    </a>
+                {{ /if }}
+                {{ if restaurant_details:tiktok_url }}
+                    <a
+                        href="{{ restaurant_details:tiktok_url }}"
+                        class="relative flex items-center justify-center text-gray-950 transition-transform hover:scale-90"
+                    >
+                        <span
+                            class="absolute size-12 [@media(pointer:fine)]:hidden"
+                        ></span>
+                        <span class="sr-only">TikTok</span>
+                        {{ partial:components/icons/social/tiktok class="size-6" }}
+                    </a>
+                {{ /if }}
+                {{ if restaurant_details:x_url }}
+                    <a
+                        href="{{ restaurant_details:x_url }}"
+                        class="relative flex items-center justify-center text-gray-950 transition-transform hover:scale-90"
+                    >
+                        <span
+                            class="absolute size-12 [@media(pointer:fine)]:hidden"
+                        ></span>
+                        <span class="sr-only">X</span>
+                        {{ partial:components/icons/social/x class="size-6" }}
+                    </a>
+                {{ /if }}
+                {{ if restaurant_details:threads_url }}
+                    <a
+                        href="{{ restaurant_details:threads_url }}"
+                        class="relative flex items-center justify-center text-gray-950 transition-transform hover:scale-90"
+                    >
+                        <span
+                            class="absolute size-12 [@media(pointer:fine)]:hidden"
+                        ></span>
+                        <span class="sr-only">Threads</span>
+                        {{ partial:components/icons/social/threads class="size-6" }}
+                    </a>
+                {{ /if }}
+                {{ if restaurant_details:bluesky_url }}
+                    <a
+                        href="{{ restaurant_details:bluesky_url }}"
+                        class="relative flex items-center justify-center text-gray-950 transition-transform hover:scale-90"
+                    >
+                        <span
+                            class="absolute size-12 [@media(pointer:fine)]:hidden"
+                        ></span>
+                        <span class="sr-only">Bluesky</span>
+                        {{ partial:components/icons/social/bluesky class="size-6" }}
+                    </a>
+                {{ /if }}
+            </div>
+            <p class="mt-8 font-medium text-gray-950 md:order-1 md:mt-0">
+                &copy;
+                {{ site_details:copyright_since ?? (now | format('Y')) }}
+                {{ unless (now | format('Y')) == (site_details:copyright_since ?? (now | format('Y'))) }}
+                    - {{ now | format('Y') }}
+                {{ /unless }}
+                {{ site_details:copyright_name ?? restaurant_details:restaurant_name ?? site:name }}
+                —
+                {{ site_details:copyright_text ?? 'All rights reserved.' }}
+            </p>
+        </div>
+    </div>
+</footer>

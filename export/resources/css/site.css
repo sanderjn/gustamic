@@ -1,0 +1,115 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@import "./typography.css" layer(utilities);
+@source "../views";
+@source "../../content";
+
+@theme {
+    --font-sans: "Plus Jakarta Sans", sans-serif;
+
+    --color-gray-50: oklch(0.985 0 0);
+    --color-gray-100: oklch(0.97 0 0);
+    --color-gray-200: oklch(0.922 0 0);
+    --color-gray-300: oklch(0.87 0 0);
+    --color-gray-400: oklch(0.708 0 0);
+    --color-gray-500: oklch(0.556 0 0);
+    --color-gray-600: oklch(0.439 0 0);
+    --color-gray-700: oklch(0.371 0 0);
+    --color-gray-800: oklch(0.269 0 0);
+    --color-gray-900: oklch(0.205 0 0);
+    --color-gray-950: oklch(0.145 0 0);
+
+    --color-brand: var(--brand-color, #000000);
+    --color-brand-dark: oklch(from var(--brand-color) calc(l - 0.1) c h);
+    --color-brand-light: oklch(from var(--brand-color) calc(l + 0.1) c h);
+}
+
+@layer base {
+    [x-cloak] {
+        display: none !important;
+    }
+
+    button {
+        cursor: pointer;
+    }
+
+    :root {
+        font-size: 100%;
+        min-height: 0vw;
+        --focus-outline-width: 2px;
+        --focus-outline-offset: 3px;
+        --focus-outline-color: currentColor;
+        --focus-outline-style: dotted;
+        --focus-form-outline-width: 3px;
+        --focus-form-outline-offset: 0;
+        --focus-form-outline-color: color-mix(
+            in oklab,
+            var(--color-primary) 50%,
+            transparent
+        );
+        --focus-form-outline-style: solid;
+    }
+
+    :focus {
+        outline-width: var(--focus-outline-width, 2px);
+        outline-offset: var(--focus-outline-offset, 3px);
+        outline-color: var(--focus-outline-color, currentColor);
+        outline-style: var(--focus-outline-style, dotted);
+    }
+
+    *:focus:not(:focus-visible) {
+        outline: 2px solid transparent;
+        outline-offset: 2px;
+    }
+
+    input:not([type="button"]),
+    textarea,
+    select {
+        &:focus {
+            box-shadow: none;
+            outline-width: var(--focus-form-outline-width, 3px);
+            outline-offset: var(--focus-form-outline-offset, 0);
+            outline-color: var(--focus-form-outline-color, currentColor);
+            outline-style: var(--focus-form-outline-style, solid);
+        }
+    }
+
+    mark {
+        background-color: var(--color-primary);
+        color: var(--color-white);
+    }
+}
+
+@layer components {
+    .container {
+        @apply mx-auto px-4 sm:px-6 lg:px-8 xl:max-w-7xl;
+    }
+}
+
+@layer utilities {
+    .hover-underline {
+        @apply relative inline-block;
+    }
+
+    .hover-underline::after {
+        content: "";
+        @apply absolute inset-x-0 -bottom-1 h-px origin-left scale-x-0 transform bg-gray-950 transition-transform duration-300 will-change-transform;
+    }
+
+    .hover-underline:hover::after {
+        @apply scale-x-100;
+    }
+
+    /* Animation classes for Alpine.js Intersect */
+    .animate-fade-in-up {
+        opacity: 1 !important;
+        translate: 0 0 !important;
+    }
+}
+
+/* Multi-line support for Fitty */
+.hero-title.fitty-multi-line,
+.hero-subtitle.fitty-multi-line {
+    white-space: normal;
+    word-wrap: break-word;
+}

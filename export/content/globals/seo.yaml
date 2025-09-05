@@ -1,0 +1,13 @@
+title: 'SEO'
+data:
+  site_name: Gustamic
+  site_description: 'Experience exceptional cuisine at Gustamic. Locally-sourced ingredients, chef-driven menu, and warm hospitality in a cozy downtown location.'
+  site_keywords: 'restaurant, fine dining, local ingredients, chef-driven, downtown, reservations, exceptional cuisine'
+  robots_txt: |-
+    User-agent: *
+    Allow: /
+
+    Sitemap: /sitemap.xml
+  business_type: Restaurant
+  price_range: $$
+  accepts_reservations: true

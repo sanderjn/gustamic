@@ -1,0 +1,118 @@
+title: 'Page Builder'
+fields:
+  -
+    handle: page_builder
+    field:
+      type: replicator
+      display: 'Page Builder'
+      instructions: 'Add sections to build your page content'
+      sets:
+        main:
+          display: Main
+          sets:
+            hero:
+              display: 'Hero Section'
+              instructions: 'Large banner section with title, subtitle and call-to-action'
+              fields:
+                -
+                  handle: title
+                  field:
+                    type: text
+                    display: Title
+                    instructions: 'Main heading for the hero section'
+                    validate:
+                      - required
+                -
+                  handle: subtitle
+                  field:
+                    type: textarea
+                    display: Subtitle
+                    instructions: 'Supporting text below the main title'
+                -
+                  handle: image
+                  field:
+                    type: assets
+                    container: assets
+                    max_files: 1
+                    display: Image
+                    instructions: 'Optional background image for the hero section'
+                    validate:
+                      - required
+            text:
+              display: 'Text with Image'
+              instructions: 'A text section with two columns, an image, and a call-to-action button.'
+              fields:
+                -
+                  handle: title
+                  field:
+                    type: text
+                    display: Title
+                    instructions: 'The main title of the section.'
+                    validate:
+                      - required
+                -
+                  handle: text_column_1
+                  field:
+                    type: markdown
+                    display: 'Text Column 1'
+                    instructions: 'Content for the first text column.'
+                    validate:
+                      - required
+                -
+                  handle: button_text
+                  field:
+                    type: text
+                    display: 'Button Text'
+                    instructions: 'The text for the call-to-action button.'
+                    width: 50
+                -
+                  handle: button_link
+                  field:
+                    type: text
+                    display: 'Button Link'
+                    instructions: 'The URL for the call-to-action button.'
+                    width: 50
+                -
+                  handle: image
+                  field:
+                    type: assets
+                    display: Image
+                    container: assets
+                    max_files: 1
+                    instructions: 'The image for the section.'
+                    validate:
+                      - required
+                -
+                  handle: text_column_2
+                  field:
+                    type: markdown
+                    display: 'Text Column 2'
+                    instructions: 'Content for the second text column.'
+                -
+                  handle: secondary_image
+                  field:
+                    type: assets
+                    display: 'Secondary Image'
+                    container: assets
+                    max_files: 1
+                    instructions: 'Optional secondary image for the section.'
+            menu_featured:
+              display: 'Menu Featured'
+              instructions: 'Display featured menu items'
+              fields:
+                -
+                  handle: title
+                  field:
+                    type: text
+                    display: 'Section Title'
+                    default: 'Our Menu'
+                    instructions: 'Title for the menu section'
+                -
+                  handle: total_items
+                  field:
+                    type: integer
+                    display: 'Total Items'
+                    instructions: 'Maximum number of featured items to show'
+                    default: 6
+                    min: 1
+                    max: 20

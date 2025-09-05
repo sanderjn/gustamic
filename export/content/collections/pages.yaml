@@ -1,0 +1,5 @@
+title: Pages
+structure:
+  root: true
+route: '{slug}'
+propagate: true

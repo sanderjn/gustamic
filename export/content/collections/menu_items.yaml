@@ -1,0 +1,12 @@
+title: Menu Items
+route: "/menu-items/{slug}"
+taxonomies:
+  - menu_category
+structure:
+  root: false
+  tree: false
+  max_depth: 1
+mount: false
+template: menu_item
+layout: layout
+blueprint: menu_items/menu_items

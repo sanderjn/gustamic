@@ -1,0 +1,15 @@
+{{ partial:components/page_title title="{{ title ?? "Menu" }}" }}
+{{ partial:components/menu_full }}
+
+<!-- Page Builder Content -->
+{{ if page_builder }}
+    {{ partial:page_builder }}
+{{ /if }}
+{{ if content }}
+    <!-- Additional Content -->
+    <section class="mt-16">
+        <div class="container">
+            <div class="prose prose-lg max-w-none">{{ content }}</div>
+        </div>
+    </section>
+{{ /if }}

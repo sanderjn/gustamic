@@ -1,0 +1,133 @@
+<!-- Menu Items by Category with Tabs -->
+<section
+    id="menu-section"
+    class="mb-16 lg:mb-24"
+    x-data="{
+        selectedId: null,
+        init() {
+            // Check if there's a hash in the URL (for external links like footer)
+            const hash = window.location.hash.slice(1);
+            if (hash) {
+                // Find the tab with matching slug
+                const tabPanels = document.querySelectorAll('[role=tabpanel]');
+                let foundTab = false;
+                tabPanels.forEach((panel, index) => {
+                    if (panel.id === hash) {
+                        this.$nextTick(() => {
+                            this.select(this.$id('tab', index + 1));
+                            // Scroll to menu section after selecting tab
+                            setTimeout(() => {
+                                const menuSection = document.getElementById('menu-section');
+                                if (menuSection) {
+                                    menuSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                }
+                            }, 100);
+                        });
+                        foundTab = true;
+                    }
+                });
+                if (!foundTab) {
+                    // If no matching tab found, select the first one
+                    this.$nextTick(() => this.select(this.$id('tab', 1)));
+                }
+            } else {
+                // Set the first available tab on page load
+                this.$nextTick(() => this.select(this.$id('tab', 1)));
+            }
+
+            // Listen for hash changes (browser back/forward)
+            window.addEventListener('hashchange', () => {
+                const newHash = window.location.hash.slice(1);
+                if (newHash) {
+                    const tabPanels = document.querySelectorAll('[role=tabpanel]');
+                    tabPanels.forEach((panel, index) => {
+                        if (panel.id === newHash) {
+                            this.select(this.$id('tab', index + 1));
+                            // Scroll to menu section
+                            setTimeout(() => {
+                                const menuSection = document.getElementById('menu-section');
+                                if (menuSection) {
+                                    menuSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                }
+                            }, 100);
+                        }
+                    });
+                }
+            });
+        },
+        select(id) {
+            this.selectedId = id;
+            // Note: We don't update the URL hash when selecting tabs on this page
+        },
+        isSelected(id) {
+            return this.selectedId === id
+        }
+    }"
+    x-id="['tab']"
+>
+    <div>
+        {{# Menu categories tabs #}}
+        <div
+            class="relative overflow-x-auto [mask-image:linear-gradient(to_right,transparent,black_1rem,black_calc(100%-2rem),transparent)] sm:overflow-visible sm:[mask-image:none]"
+        >
+            <ul
+                x-ref="tablist"
+                @keydown.right.prevent.stop="select($focus.next().id)"
+                @keydown.home.prevent.stop="select($focus.first().id)"
+                @keydown.page-up.prevent.stop="select($focus.first().id)"
+                @keydown.left.prevent.stop="select($focus.prev().id)"
+                @keydown.end.prevent.stop="select($focus.last().id)"
+                @keydown.page-down.prevent.stop="select($focus.last().id)"
+                role="tablist"
+                class="mb-2 flex flex-row gap-x-6 px-4 sm:container sm:mx-auto sm:flex-wrap sm:px-6 lg:px-8"
+            >
+                {{ taxonomy:menu_category sort="sort_order:asc" scope="category" }}
+                    <li>
+                        <button
+                            :id="$id('tab', {{ count }})"
+                            @click="select($id('tab', {{ count }}))"
+                            @mousedown.prevent
+                            @focus="select($id('tab', {{ count }}))"
+                            type="button"
+                            :tabindex="isSelected($id('tab', {{ count }})) ? 0 : -1"
+                            :aria-selected="isSelected($id('tab', {{ count }}))"
+                            class="group relative cursor-pointer py-1 text-lg font-medium whitespace-nowrap text-gray-950 transition-colors duration-200"
+                            role="tab"
+                        >
+                            {{ category:title }}
+                            <span
+                                class="absolute inset-x-0 bottom-0 h-0.5 origin-left scale-x-0 transform bg-gray-950 transition-transform duration-300 group-hover:scale-x-100"
+                                :class="{ 'scale-x-100': isSelected($id('tab', {{ count }})) }"
+                            ></span>
+                        </button>
+                    </li>
+                {{ /taxonomy:menu_category }}
+            </ul>
+        </div>
+
+        <div class="container">
+            <div role="tabpanels">
+                {{ taxonomy:menu_category sort="sort_order:asc" scope="category" }}
+                    {{ collection:menu_items taxonomy:menu_category="{{ slug }}" as="menu_items" sort="featured:desc|title:asc" }}
+                        {{ if (menu_items | count) > 0 }}
+                            <section
+                                x-show="isSelected($id('tab', {{ count }}))"
+                                :aria-labelledby="$id('tab', {{ count }})"
+                                role="tabpanel"
+                                id="{{ slug }}"
+                            >
+                                <div
+                                    class="mt-12 grid grid-cols-1 gap-16 md:grid-cols-2"
+                                >
+                                    {{ menu_items }}
+                                        {{ partial:components/menu_item_card title="{{ title }}" description="{{ description }}" price="{{ price }}" featured="{{ featured }}" }}
+                                    {{ /menu_items }}
+                                </div>
+                            </section>
+                        {{ /if }}
+                    {{ /collection:menu_items }}
+                {{ /taxonomy:menu_category }}
+            </div>
+        </div>
+    </div>
+</section>

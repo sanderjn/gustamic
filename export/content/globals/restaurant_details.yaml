@@ -1,0 +1,18 @@
+title: 'Restaurant Details'
+data:
+  restaurant_name: Gustamic
+  brand_color: '#8b4513'
+  background_color: '#fff0dd'
+  address: '123 Main Street, Downtown'
+  phone: '(555) 123-4567'
+  email: info@gustamic.com
+  hours_text: |-
+    Mon - Thu 11:00 AM - 9:00 PM
+    Fri - Sat: 11:00 AM - 10:00 PM
+    Sun: 12:00 PM - 8:00 PM
+
+    Hours may vary during holidays. Please call ahead to confirm.
+  facebook_url: '#'
+  instagram_url: '#'
+  tripadvisor_url: '#'
+  tiktok_url: '#'
