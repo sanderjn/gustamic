@@ -8,11 +8,11 @@ A modern Statamic starter kit designed specifically for restaurants, cafes, and 
 
 -   **Menu Management**: Easily manage your restaurant menu items with categories, prices, and descriptions
 -   **Page Builder**: Flexible page builder with pre-designed components including hero sections, featured menu items, and text blocks
--   **Responsive Design**: Mobile-first design using Tailwind CSS v4
--   **Interactive Components**: Smooth interactions powered by Alpine.js
--   **Price Formatting**: Built-in price formatting helpers for consistent menu pricing display
+-   **Price Formatting**: Built-in price formatting helpers for consistent menu pricing display with support for 60+ global currencies
 -   **Color Customization**: Set your brand colors directly from the control panel with carefully selected color presets
--   **Sample Content**: Optional sample content to help you get started quickly
+-   **Comprehensive SEO**: Page-specific and global SEO settings including meta tags, Open Graph, and local business schema markup
+-   **Reservation System Integration**: Connect to external reservation systems like OpenTable or link to internal booking pages
+-   **Third-party Scripts**: Easy integration of analytics, tracking, and other scripts through the control panel
 
 ## Requirements
 
