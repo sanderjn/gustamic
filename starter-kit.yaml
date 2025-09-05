@@ -1,19 +1,17 @@
-version: 0.1.0
 updatable: false
 export_paths:
-  - config/statamic
+  - app/Modifiers
   - content
-  - lang
-  - resources/blueprints
-  - resources/css
-  - resources/fieldsets
+  - resources/blueprints/collections
+  - resources/blueprints/globals
+  - resources/blueprints/taxonomies
+  - resources/css/site.css
+  - resources/css/typography.css
+  - resources/fieldsets/page_builder.yaml
   - resources/forms
-  - resources/js
+  - resources/js/site.js
   - resources/views
   - public/assets
-  - app
-  - routes/web.php
-  - vite.config.js
   - package.json
 dependencies:
   moneyphp/money: ^4.7
