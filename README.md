@@ -39,7 +39,7 @@ If you prefer to install manually:
 statamic new my-restaurant
 
 # Install the starter kit
-php please starter-kit:install sanderjager/gustamic
+php please starter-kit:install sanderjn/gustamic
 ```
 
 ## Post-Installation Setup
@@ -172,7 +172,7 @@ npm run watch
 
 ## Support
 
-For issues, questions, or contributions, please visit the [GitHub repository](https://github.com/sanderjager/gustamic).
+For issues, questions, or contributions, please visit the [GitHub repository](https://github.com/sanderjn/gustamic).
 
 ## License
 
