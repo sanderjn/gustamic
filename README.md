@@ -1,28 +1,140 @@
 # Gustamic - Restaurant Statamic Starter Kit
 
-**Version: 0.1.0**
+A modern, **no-code-required** Statamic starter kit designed specifically for restaurants, cafes, and food businesses. Built with Tailwind CSS v4 and some Alpine.js for interactivity.
 
-A modern Statamic starter kit designed specifically for restaurants, cafes, and food businesses. Built with Tailwind CSS v4 and Alpine.js.
+## 🎯 Perfect for Non-Developers
+
+**No developer experience required!** Once installed, you can build and manage your entire restaurant website through the Statamic Control Panel. Everything is dynamic and customizable without touching any code:
+
+-   Upload your own logo
+-   Set your brand colors (background & accent colors for CTA buttons)
+-   Manage all content through the intuitive Control Panel
+-   Build pages using the pagebuilder
+-   Update menu items and prices globally
+-   Configure reservations and contact information
+
+This starter kit is designed to be completely manageable by restaurant owners and staff - no ongoing developer support needed!
 
 ## Features
 
--   **Menu Management**: Easily manage your restaurant menu items with categories, prices, and descriptions
--   **Page Builder**: Flexible page builder with pre-designed components including hero sections, featured menu items, and text blocks
--   **Price Formatting**: Built-in price formatting helpers for consistent menu pricing display with support for 60+ global currencies
--   **Color Customization**: Set your brand colors directly from the control panel with carefully selected color presets
+-   **Menu Management**: Easily manage your restaurant menu items with prices, images, categories and descriptions
+-   **Three Pre-built Page Types**: Ready-to-use templates for all your restaurant needs
+-   **Global Currency Settings**: Support for 60+ major currencies with automatic formatting (with or without currency symbols)
+-   **Page Builder**: Flexible page builder with pre-designed components
+-   **Color Customization**: Set your brand colors directly from the control panel
 -   **Comprehensive SEO**: Page-specific and global SEO settings including meta tags, Open Graph, and local business schema markup
--   **Reservation System Integration**: Connect to external reservation systems like OpenTable or link to internal booking pages
--   **Third-party Scripts**: Easy integration of analytics, tracking, and other scripts through the control panel
+-   **Reservation System Integration**: Built-in contact form for reservations or connect to external systems with custom scripts
+-   **Third-party Scripts**: Easy integration of analytics, tracking, and floating reservation buttons
 
-## Requirements
+## Page Types
 
--   PHP 8.1+
+Gustamic includes three professionally designed page types that cover all your restaurant website needs:
+
+### 1. Landing Pages (Homepage & Marketing Pages)
+
+Perfect for your homepage or any promotional page, built with three customizable blocks:
+
+-   **Hero Block**: Eye-catching banner with your restaurant imagery and call-to-action
+-   **Text Block**: Share your story, describe your cuisine, or highlight special offers
+-   **Featured Menu Items Block**: Showcase your signature dishes with automatic price updates
+
+### 2. Menu Page
+
+A dedicated menu display that automatically organizes all your dishes:
+
+-   Displays all menu items organized by category (appetizers, mains, desserts, etc.)
+-   Prices update globally - change once, update everywhere
+-   Support for 60+ major currencies with flexible display options (with/without currency symbols)
+
+### 3. Contact Page
+
+Everything your customers need to reach you or make a reservation:
+
+-   Display your restaurant's contact information (address, phone, hours)
+-   Built-in Statamic contact form for reservations or inquiries
+-   Option to integrate external reservation systems (OpenTable, Resy, etc.)
+-   Support for floating reservation buttons via script tags
+-   Fully customizable through the Control Panel
+
+## Managing Your Restaurant Website
+
+### Adding Menu Items
+
+1. Navigate to the Control Panel
+2. Go to **Collections → Menu Items**
+3. Click "Create Menu Item"
+4. Fill in the details:
+    - Name and description
+    - Price (will be formatted automatically)
+    - Category (appetizers, mains, desserts, etc.)
+    - Optional image
+    - Featured status (to show on homepage)
+5. Save and publish
+
+Your menu items will automatically appear on the menu page and can be featured on landing pages.
+
+### Creating Pages
+
+1. In the Control Panel, go to **Collections → Pages**
+2. Create a new page
+3. Choose your page template (landing, menu, or contact)
+4. For landing pages:
+    - Use the Page Builder to add sections
+    - Choose from hero, text, or featured menu components
+    - Customize each section's content
+5. Configure SEO settings (meta title, description, social sharing image)
+6. Save and publish
+
+### Managing Global Settings
+
+Navigate to **Globals** in the Control Panel to manage site-wide settings. Gustamic includes three global sets:
+
+#### 1. Restaurant Details
+
+Configure your restaurant's core information:
+
+-   Restaurant name and logo
+-   Brand colors (background and accent colors)
+-   Contact information (address, phone, email)
+-   Opening hours
+-   Social media links (Facebook, Instagram, Yelp, TripAdvisor, TikTok, X, Threads, Bluesky)
+
+#### 2. Site Details
+
+Manage site-wide settings and functionality:
+
+-   Currency selection from 60+ global currencies
+-   Currency symbol display toggle
+-   Reservation system configuration (URL, button text)
+-   Footer customization (title, description, image)
+-   Copyright information
+-   Third-party scripts (head and body scripts for analytics, tracking, floating reservation buttons)
+
+#### 3. SEO Settings
+
+Set default SEO configuration for your entire site:
+
+-   Site name, description, and keywords
+-   Default Open Graph image for social sharing
+-   Google Analytics ID and site verification
+-   Local business schema markup (business type, price range)
+-   Robots.txt configuration
+
+All these settings can be managed without any coding knowledge - just fill in the fields and save!
+
+---
+
+## Developer Information
+
+### Requirements
+
+-   PHP 8.2+
 -   Composer
--   Node.js 18+ and npm
+-   Node.js and npm
 -   Laravel 10+
 -   Statamic 5+
 
-## Installation
+### Installation
 
 Install this starter kit via the Statamic CLI:
 
@@ -32,7 +144,7 @@ statamic new my-restaurant sanderjn/gustamic
 
 During installation, you'll be prompted whether to include sample content. Choose "Yes" if you want example menu items and pages to help you get started.
 
-### Manual Installation
+#### Manual Installation
 
 If you prefer to install manually:
 
@@ -44,80 +156,50 @@ statamic new my-restaurant
 php please starter-kit:install sanderjn/gustamic
 ```
 
-## Post-Installation Setup
+### Post-Installation Setup
 
 After installation, complete the setup:
 
 ```bash
-# Install PHP dependencies
-composer install
-
 # Install Node dependencies
 npm install
 
-# Build frontend assets
+# Build frontend assets for production
 npm run build
 
 # Or start the development server
 npm run dev
 ```
 
-## Project Structure
+### Project Structure
 
 ```
 ├── app/
-│   ├── Helpers/         # Price formatting utilities
-│   └── Modifiers/       # Custom Statamic modifiers
+│   └── Modifiers/       # Custom Statamic modifiers (formatPrice, etc.)
 ├── content/
 │   ├── collections/
-│   │   ├── menu_items/  # Restaurant menu items
-│   │   └── pages/       # Static pages
+│   │   ├── menu_items/  # Sample menu items
+│   │   └── pages/       # Sample pages
 │   ├── globals/         # Global settings
-│   ├── navigation/      # Navigation menus
+│   ├── navigation/      # Navigation menu
 │   └── taxonomies/      # Menu categories
 ├── resources/
 │   ├── blueprints/      # Content blueprints
 │   ├── css/             # Tailwind CSS styles
 │   ├── js/              # Alpine.js and JavaScript
 │   └── views/           # Antlers templates
-└── public/assets/       # Public assets
+└── public/assets/       # Sample images
 ```
 
-## Key Features
+### Styling & Templates
 
-### Menu Management
+#### Tailwind CSS
 
-The starter kit includes a complete menu management system:
+The starter kit uses Tailwind CSS v4 for styling. The main stylesheet is located at:
 
--   **Menu Items Collection**: Create and manage individual menu items
--   **Menu Categories**: Organize items by category (appetizers, mains, desserts, etc.)
--   **Price Display**: Automatic price formatting with currency support
--   **Featured Items**: Highlight special dishes on your homepage
+-   `resources/css/site.css`
 
-### Page Builder Components
-
-Build custom pages with included components:
-
--   **Hero Section**: Eye-catching hero banners with text overlays
--   **Featured Menu**: Display selected menu items prominently
--   **Text Blocks**: Flexible content sections with rich text support
-
-### Customization
-
-#### Color Theming
-
-Easily customize your restaurant's visual identity through the Control Panel:
-
--   **Brand Color**: Set your primary accent color for buttons and highlights
--   **Background Color**: Select your site's background tone
-
-Navigate to Globals → Restaurant Details in the Control Panel to customize your colors.
-
-#### Styling
-
-The starter kit uses Tailwind CSS v4. Customize your design in:
-
--   `resources/css/site.css` - Main stylesheet
+Custom color properties are dynamically generated based on the Control Panel settings.
 
 #### Templates
 
@@ -128,9 +210,7 @@ All templates use Antlers and are located in `resources/views/`:
 -   `partials/` - Reusable template components
 -   `page_builder/` - Page builder section templates
 
-## Development
-
-### Available Commands
+### Development Commands
 
 ```bash
 # Start development server with hot reload
@@ -138,34 +218,15 @@ npm run dev
 
 # Build for production
 npm run build
-
-# Watch files for changes
-npm run watch
 ```
 
-### Adding Menu Items
+### Dependencies
 
-1. Navigate to the Control Panel
-2. Go to Collections → Menu Items
-3. Click "Create Menu Item"
-4. Fill in the details (name, description, price, category)
-5. Save and publish
-
-### Creating Pages
-
-1. In the Control Panel, go to Collections → Pages
-2. Create a new page
-3. Use the Page Builder field to add sections
-4. Choose from hero, menu featured, or text components
-5. Customize content and publish
-
-## Dependencies
-
-### PHP Dependencies
+#### PHP Dependencies
 
 -   `moneyphp/money`: Currency and price handling
 
-### JavaScript Dependencies
+#### JavaScript Dependencies
 
 -   Alpine.js: Reactive components
 -   Tailwind CSS v4: Utility-first CSS
@@ -175,11 +236,3 @@ npm run watch
 ## Support
 
 For issues, questions, or contributions, please visit the [GitHub repository](https://github.com/sanderjn/gustamic).
-
-## License
-
-This starter kit is open-source software. Please check the repository for license details.
-
-## Credits
-
-Created by Sander Janssen for the Statamic community. Perfect for restaurants, cafes, bistros, and any food-related business looking for a professional web presence.
