@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            box-sizing: border-box;
+            background-color: #f8fafc;
+            color: #74787e;
+            height: 100%;
+            hyphens: auto;
+            line-height: 1.4;
+            margin: 0;
+            -moz-hyphens: auto;
+            -ms-word-break: break-all;
+            width: 100% !important;
+            -webkit-hyphens: auto;
+            -webkit-text-size-adjust: none;
+            word-break: break-word;
+        }
+    </style>
+</head>
+<body>
+    <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+        <div style="background-color: #ffffff; border-radius: 8px; padding: 32px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            <h1 style="color: #2d3748; font-size: 24px; margin-bottom: 24px;">New Reservation Request</h1>
+
+            <p style="color: #4a5568; margin-bottom: 24px;">You have received a new reservation request from your website.</p>
+
+            <table style="width: 100%; margin-bottom: 24px;">
+                <tr>
+                    <td style="padding: 8px 0; color: #718096; width: 150px; vertical-align: top;">Name:</td>
+                    <td style="padding: 8px 0; color: #2d3748; font-weight: 600;">{{ name }}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px 0; color: #718096; vertical-align: top;">Email:</td>
+                    <td style="padding: 8px 0; color: #2d3748; font-weight: 600;">
+                        <a href="mailto:{{ email }}" style="color: #3182ce; text-decoration: none;">{{ email }}</a>
+                    </td>
+                </tr>
+                {{ if phone }}
+                <tr>
+                    <td style="padding: 8px 0; color: #718096; vertical-align: top;">Phone:</td>
+                    <td style="padding: 8px 0; color: #2d3748; font-weight: 600;">{{ phone }}</td>
+                </tr>
+                {{ /if }}
+                {{ if preferred_date }}
+                <tr>
+                    <td style="padding: 8px 0; color: #718096; vertical-align: top;">Preferred Date:</td>
+                    <td style="padding: 8px 0; color: #2d3748; font-weight: 600;">{{ preferred_date }}</td>
+                </tr>
+                {{ /if }}
+                {{ if preferred_time }}
+                <tr>
+                    <td style="padding: 8px 0; color: #718096; vertical-align: top;">Preferred Time:</td>
+                    <td style="padding: 8px 0; color: #2d3748; font-weight: 600;">{{ preferred_time }}</td>
+                </tr>
+                {{ /if }}
+                {{ if party_size }}
+                <tr>
+                    <td style="padding: 8px 0; color: #718096; vertical-align: top;">Party Size:</td>
+                    <td style="padding: 8px 0; color: #2d3748; font-weight: 600;">
+                        {{ if party_size == "1" }}
+                            1 person
+                        {{ elseif party_size == "7+" }}
+                            7+ people
+                        {{ else }}
+                            {{ party_size }} people
+                        {{ /if }}
+                    </td>
+                </tr>
+                {{ /if }}
+            </table>
+
+            {{ if message }}
+            <div style="background-color: #f7fafc; padding: 16px; border-radius: 4px; margin-bottom: 24px;">
+                <p style="color: #718096; margin: 0 0 8px 0; font-weight: 600;">Message:</p>
+                <p style="color: #2d3748; margin: 0; white-space: pre-line;">{{ message }}</p>
+            </div>
+            {{ /if }}
+
+            <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 24px 0;">
+
+            <p style="color: #a0aec0; font-size: 14px; margin: 0;">
+                This email was sent from your restaurant website's contact form.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,20 +1,29 @@
-{{ partial:components/page_title }}
+{{#
+    @name Contact Form Block
+    @description Page builder block for contact form with information
+#}}
+
 <!-- Contact Form Section -->
-<section class="pb-16 lg:pb-24">
+<section class="py-16 lg:py-24">
     <div class="container">
+        {{ if title }}
+            <h2 class="mb-12 text-4xl font-semibold tracking-tight text-pretty text-gray-950 sm:text-5xl">
+                {{ title }}
+            </h2>
+        {{ /if }}
         <div class="grid grid-cols-1 gap-12 lg:grid-cols-2">
             {{# Contact Information #}}
             <div>
-                <h3 class="mb-8 text-2xl font-bold text-gray-950">{{ contact_settings:contact_contact_info_title ?? 'Visit Us' }}</h3>
-                {{ partial:components/contact_info :show_contact_info="contact_settings:contact_show_contact_info" }}
+                <h3 class="mb-8 text-2xl font-bold text-gray-950">{{ contact_info_title ?? 'Visit Us' }}</h3>
+                {{ partial:components/contact_info :show_contact_info="show_contact_info" }}
             </div>
 
             {{# Contact Form #}}
             <div>
-                {{ if contact_settings:contact_contact_form_title }}
-                    <h3 class="mb-8 text-2xl font-bold text-gray-950">{{ contact_settings:contact_contact_form_title }}</h3>
+                {{ if contact_form_title }}
+                    <h3 class="mb-8 text-2xl font-bold text-gray-950">{{ contact_form_title }}</h3>
                 {{ /if }}
-                {{ contact_settings:contact_selected_form }}
+                {{ selected_form }}
                     {{ form:create in="{ handle }" }}
                         {{ if success }}
                             {{ partial:components/form_alert type="success" title="Thank you for your message! We'll get back to you soon." }}
@@ -54,23 +63,8 @@
                             {{ partial:components/button text="Send Message" type="submit" size="lg" icon="true" class="transition-transform duration-200 will-change-transform hover:scale-[97%]" }}
                         </div>
                     {{ /form:create }}
-                {{ /contact_settings:contact_selected_form }}
+                {{ /selected_form }}
             </div>
         </div>
     </div>
 </section>
-
-<!-- Page Builder Content -->
-{{ if page_builder }}
-    {{ partial:page_builder }}
-{{ /if }}
-<!-- Additional Content -->
-{{ if content }}
-    <section class="py-16 lg:py-20">
-        <div class="container">
-            <div class="prose prose-lg mx-auto max-w-none">
-                {{ content | markdown }}
-            </div>
-        </div>
-    </section>
-{{ /if }}

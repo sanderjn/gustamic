@@ -11,7 +11,6 @@ tabs:
             field:
               type: text
               display: 'Restaurant Name'
-              instructions: 'Name of your restaurant'
               validate:
                 - required
           -
@@ -36,7 +35,7 @@ tabs:
                 - '#d4472b'
                 - '#2d5016'
                 - '#b8860b'
-              instructions: 'Will be used for buttons. Will fallback to black if not set.'
+              instructions: 'Used for buttons and accents'
           -
             handle: background_color
             field:

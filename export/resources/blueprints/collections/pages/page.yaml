@@ -12,39 +12,28 @@ tabs:
               required: true
               validate:
                 - required
+              display: Title
           -
             handle: subtitle
             field:
               type: text
               display: 'Page Subtitle'
-              instructions: 'Subtitle displayed below the main title'
               if:
                 template: 'contains_any page_templates/contact, page_templates/menu'
       -
+        display: 'Contact Settings'
         fields:
           -
-            handle: contact_form_config
+            handle: contact_settings
             field:
               type: group
               display: 'Contact Form Configuration'
-              instructions: 'Configure the contact form settings'
-              if:
-                template: 'equals page_templates/contact'
               fields:
                 -
-                  handle: section_title
-                  field:
-                    type: text
-                    display: 'Contact Section Title'
-                    instructions: 'Main title for the contact form section (leave empty to hide)'
-                -
-                  handle: section_subtitle
-                  field:
-                    type: text
-                    display: 'Contact Section Subtitle'
-                    instructions: 'Subtitle for the contact form section (leave empty to hide)'
-                -
-                  import: contact_form_config
+                  import: contact_form_settings
+                  prefix: contact_
+              if:
+                template: 'equals page_templates/contact'
       -
         display: 'Page Builder'
         fields:
@@ -69,26 +58,25 @@ tabs:
             field:
               type: text
               display: Keywords
-              instructions: 'Comma-separated keywords specific to this page'
           -
             handle: seo_title
             field:
               type: text
               display: 'Meta Title'
-              instructions: 'Custom title for search engines (overrides page title)'
+              instructions: 'Overrides page title in search results'
               validate: 'max:60'
           -
             handle: og_title
             field:
               type: text
               display: 'Open Graph Title'
-              instructions: 'Title for social media sharing (defaults to meta title or page title)'
+              instructions: 'Defaults to meta title or page title'
           -
             handle: og_description
             field:
               type: textarea
               display: 'Open Graph Description'
-              instructions: 'Description for social media sharing (defaults to meta description)'
+              instructions: 'Defaults to meta description'
               rows: 3
           -
             handle: og_image

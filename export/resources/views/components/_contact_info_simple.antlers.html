@@ -1,0 +1,34 @@
+{{#
+    @name Simple Contact Info
+    @description Simple Contact Info Component for Footer
+    @param {string} address - Restaurant address
+    @param {string} phone - Phone number
+    @param {string} email - Email address
+    @param {string} class - Additional CSS classes
+#}}
+
+<div class="{{ class }} space-y-2 font-medium text-gray-950">
+    {{ if address }}
+        <p>{{ address }}</p>
+    {{ /if }}
+    {{ if phone }}
+        <p>
+            <a
+                href="tel:{{ phone | replace(' ', '') | replace('(', '') | replace(')', '') | replace('-', '') }}"
+                class="hover-underline inline-block transition-colors"
+            >
+                Phone: {{ phone }}
+            </a>
+        </p>
+    {{ /if }}
+    {{ if email }}
+        <p>
+            <a
+                href="mailto:{{ email }}"
+                class="hover-underline inline-block transition-colors"
+            >
+                Email: {{ email }}
+            </a>
+        </p>
+    {{ /if }}
+</div>

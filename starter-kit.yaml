@@ -1,5 +1,8 @@
+post_install:
+  - 'php artisan gustamic:install'
 updatable: false
 export_paths:
+  - app/Console/Commands/InstallGustamic.php
   - app/Modifiers
   - content
   - resources/blueprints/collections

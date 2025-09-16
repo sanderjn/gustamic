@@ -11,7 +11,6 @@ tabs:
             field:
               type: select
               display: Currency
-              instructions: "Select your restaurant's currency for menu pricing"
               default: USD
               options:
                 USD: 'US Dollar ($)'
@@ -70,7 +69,6 @@ tabs:
             field:
               type: toggle
               display: 'Show Currency Symbol'
-              instructions: 'Display currency symbols (e.g., $, €, £) with menu prices'
               default: true
       -
         display: 'Reservations & Bookings'
@@ -86,7 +84,6 @@ tabs:
             field:
               type: text
               display: 'Reservation Button Text'
-              instructions: 'Text for reservation buttons throughout the site'
               placeholder: 'Make a Reservation'
       -
         display: 'Footer Settings'
@@ -101,7 +98,6 @@ tabs:
             field:
               type: textarea
               display: 'Footer Description'
-              instructions: 'Custom description text for the footer section'
               rows: 3
           -
             handle: show_menu_category
@@ -124,7 +120,7 @@ tabs:
             field:
               type: text
               display: 'Copyright name'
-              instructions: 'Uses the application name as a fallback.'
+              instructions: 'Defaults to application name'
               width: 50
           -
             handle: copyright_since
@@ -138,7 +134,7 @@ tabs:
             field:
               type: text
               display: 'Copyright text'
-              instructions: 'Uses "All rights reserved" as fallback.'
+              instructions: 'Defaults to "All rights reserved"'
       -
         display: 'Third-party Scripts'
         fields:
@@ -154,5 +150,5 @@ tabs:
             field:
               type: textarea
               display: 'Body Scripts'
-              instructions: 'Scripts to include before closing </body> tag'
+              instructions: 'Add before closing </body> tag'
               rows: 5

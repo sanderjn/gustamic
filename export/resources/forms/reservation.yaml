@@ -1,0 +1,9 @@
+title: 'Reservation Request'
+honeypot: website
+email:
+  -
+    to: '{{ global:restaurant_details:email }}'
+    from: '{{ email }}'
+    reply_to: '{{ email }}'
+    subject: 'New reservation request from {{ name }}'
+    template: reservation-notification

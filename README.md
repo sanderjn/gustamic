@@ -20,7 +20,7 @@ This starter kit is designed to be completely manageable by restaurant owners an
 -   **Menu Management**: Easily manage your restaurant menu items with prices, images, categories and descriptions
 -   **Three Pre-built Page Types**: Ready-to-use templates for all your restaurant needs
 -   **Global Currency Settings**: Support for 60+ major currencies with automatic formatting (with or without currency symbols)
--   **Page Builder**: Flexible page builder with pre-designed components
+-   **Page Builder**: Flexible page builder with pre-designed components including automatic dividers between sections
 -   **Color Customization**: Set your brand colors directly from the control panel
 -   **Comprehensive SEO**: Page-specific and global SEO settings including meta tags, Open Graph, and local business schema markup
 -   **Reservation System Integration**: Built-in contact form for reservations or connect to external systems with custom scripts
@@ -32,11 +32,12 @@ Gustamic includes three professionally designed page types that cover all your r
 
 ### 1. Landing Pages (Homepage & Marketing Pages)
 
-Perfect for your homepage or any promotional page, built with three customizable blocks:
+Perfect for your homepage or any promotional page, built with customizable blocks:
 
--   **Hero Block**: Eye-catching banner with your restaurant imagery and call-to-action
+-   **Hero Block**: Eye-catching banner with your restaurant imagery
 -   **Text Block**: Share your story, describe your cuisine, or highlight special offers
 -   **Featured Menu Items Block**: Showcase your signature dishes with automatic price updates
+-   **Contact Block**: Display contact information and a contact form
 
 ### 2. Menu Page
 
@@ -51,9 +52,10 @@ A dedicated menu display that automatically organizes all your dishes:
 Everything your customers need to reach you or make a reservation:
 
 -   Display your restaurant's contact information (address, phone, hours)
--   Built-in Statamic contact form for reservations or inquiries
--   Option to integrate external reservation systems (OpenTable, Resy, etc.)
--   Support for floating reservation buttons via script tags
+-   Two form options:
+    -   **Standard Contact Form**: Simple contact form for general inquiries
+    -   **Reservation Form**: Dedicated form for table reservations with date, time, and party size fields
+-   Built using native Statamic forms functionality for easy management
 -   Fully customizable through the Control Panel
 
 ## Managing Your Restaurant Website
@@ -80,8 +82,9 @@ Your menu items will automatically appear on the menu page and can be featured o
 3. Choose your page template (landing, menu, or contact)
 4. For landing pages:
     - Use the Page Builder to add sections
-    - Choose from hero, text, or featured menu components
+    - Choose from hero, text, featured menu, contact info, or contact form components
     - Customize each section's content
+    - Dividers are automatically added between sections for clean separation
 5. Configure SEO settings (meta title, description, social sharing image)
 6. Save and publish
 

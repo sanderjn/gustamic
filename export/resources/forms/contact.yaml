@@ -1,0 +1,9 @@
+title: 'Contact Form'
+honeypot: website
+email:
+  -
+    to: info@gustamic.com
+    from: '{{ email }}'
+    reply_to: '{{ email }}'
+    subject: 'New contact message from {{ name }}'
+    template: _contact-notification

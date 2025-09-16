@@ -13,13 +13,13 @@ fields:
             hero:
               display: 'Hero Section'
               instructions: 'Large banner section with title, subtitle and call-to-action'
+              icon: media-image-photo-focus-frame
               fields:
                 -
                   handle: title
                   field:
                     type: text
                     display: Title
-                    instructions: 'Main heading for the hero section'
                     validate:
                       - required
                 -
@@ -27,7 +27,6 @@ fields:
                   field:
                     type: textarea
                     display: Subtitle
-                    instructions: 'Supporting text below the main title'
                 -
                   handle: image
                   field:
@@ -35,19 +34,16 @@ fields:
                     container: assets
                     max_files: 1
                     display: Image
-                    instructions: 'Optional background image for the hero section'
-                    validate:
-                      - required
             text:
               display: 'Text with Image'
               instructions: 'A text section with two columns, an image, and a call-to-action button.'
+              icon: text-formatting-wrap-image-left
               fields:
                 -
                   handle: title
                   field:
                     type: text
                     display: Title
-                    instructions: 'The main title of the section.'
                     validate:
                       - required
                 -
@@ -55,7 +51,6 @@ fields:
                   field:
                     type: markdown
                     display: 'Text Column 1'
-                    instructions: 'Content for the first text column.'
                     validate:
                       - required
                 -
@@ -63,14 +58,12 @@ fields:
                   field:
                     type: text
                     display: 'Button Text'
-                    instructions: 'The text for the call-to-action button.'
                     width: 50
                 -
                   handle: button_link
                   field:
                     type: text
                     display: 'Button Link'
-                    instructions: 'The URL for the call-to-action button.'
                     width: 50
                 -
                   handle: image
@@ -79,15 +72,11 @@ fields:
                     display: Image
                     container: assets
                     max_files: 1
-                    instructions: 'The image for the section.'
-                    validate:
-                      - required
                 -
                   handle: text_column_2
                   field:
                     type: markdown
                     display: 'Text Column 2'
-                    instructions: 'Content for the second text column.'
                 -
                   handle: secondary_image
                   field:
@@ -95,10 +84,10 @@ fields:
                     display: 'Secondary Image'
                     container: assets
                     max_files: 1
-                    instructions: 'Optional secondary image for the section.'
             menu_featured:
               display: 'Menu Featured'
               instructions: 'Display featured menu items'
+              icon: favorite-star
               fields:
                 -
                   handle: title
@@ -106,7 +95,6 @@ fields:
                     type: text
                     display: 'Section Title'
                     default: 'Our Menu'
-                    instructions: 'Title for the menu section'
                 -
                   handle: total_items
                   field:
@@ -116,3 +104,17 @@ fields:
                     default: 6
                     min: 1
                     max: 20
+            contact_form:
+              display: 'Contact Form'
+              instructions: 'Contact form section with contact information'
+              icon: mail-chat-bubble-text
+              fields:
+                -
+                  handle: title
+                  field:
+                    type: text
+                    display: 'Section Title'
+                    instructions: 'H2 heading displayed above the contact section'
+                    default: 'Contact Us'
+                -
+                  import: contact_form_settings
