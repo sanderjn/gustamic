@@ -10,32 +10,34 @@
                 <p
                     class="mt-10 max-w-md text-lg font-medium text-pretty text-gray-950"
                 >
-                    {{ site_details:footer_description ?? restaurant_details:about_description }}
+                    {{ site_details:footer_description ?? seo:site_description }}
                 </p>
                 {{ if site_details:reservation_url }}
                     <div class="mt-8 lg:mt-16">
                         {{ if site_details:reservation_url | starts_with('http') }}
-                            {{ partial:components/button target="_blank" rel="noopener noreferrer" size="lg" icon="true" text="{site_details:reservation_button_text}" href="{site_details:reservation_url}" }}
+                            {{ partial:components/button target="_blank" rel="noopener noreferrer" size="lg" icon="true" text="{{ site_details:reservation_button_text ?? 'Make a Reservation' }}" href="{site_details:reservation_url}" }}
                         {{ else }}
-                            {{ partial:components/button size="lg" icon="true" text="{site_details:reservation_button_text}" href="{site_details:reservation_url}" }}
+                            {{ partial:components/button size="lg" icon="true" text="{{ site_details:reservation_button_text ?? 'Make a Reservation' }}" href="{site_details:reservation_url}" }}
                         {{ /if }}
                     </div>
                 {{ /if }}
             </div>
-            <img
-                class="w-full translate-y-24 transform opacity-0 transition-all duration-700 ease-out will-change-transform"
-                x-data
-                x-intersect.once="$el.classList.add('animate-fade-in-up')"
-                src="{{ glide:site_details:footer_image width='576' }}"
-                alt="{{ site_details:footer_image:alt ?? 'Restaurant image' }}"
-                width="576"
-                height="432"
-                loading="lazy"
-                decoding="async"
-            />
+            {{ if site_details:footer_image }}
+                <img
+                    class="w-full translate-y-24 transform opacity-0 transition-all duration-700 ease-out will-change-transform"
+                    x-data
+                    x-intersect.once="$el.classList.add('animate-fade-in-up')"
+                    src="{{ glide:site_details:footer_image width='576' }}"
+                    alt="{{ site_details:footer_image:alt ?? 'Restaurant image' }}"
+                    width="576"
+                    height="432"
+                    loading="lazy"
+                    decoding="async"
+                />
+            {{ /if }}
         </div>
         <div
-            class="mt-16 grid grid-cols-1 gap-12 border-t border-white/10 sm:grid-cols-2 lg:mt-24 lg:grid-cols-4 lg:gap-16"
+            class="mt-16 grid grid-cols-1 gap-12 border-t border-black/10 sm:grid-cols-2 lg:mt-24 lg:grid-cols-4 lg:gap-16"
         >
             <div>
                 <h3 class="text-xl font-semibold uppercase">
@@ -75,7 +77,7 @@
             </div>
         </div>
         <div
-            class="mt-16 border-t border-white/10 md:flex md:items-center md:justify-between lg:mt-24"
+            class="mt-16 border-t border-black/10 md:flex md:items-center md:justify-between lg:mt-24"
         >
             <div class="flex flex-wrap items-center gap-6 md:order-2">
                 {{ if restaurant_details:facebook_url }}
@@ -177,12 +179,12 @@
             </div>
             <p class="mt-8 font-medium text-gray-950 md:order-1 md:mt-0">
                 &copy;
-                {{ site_details:copyright_since ?? (now | format('Y')) }}
-                {{ unless (now | format('Y')) == (site_details:copyright_since ?? (now | format('Y'))) }}
-                    - {{ now | format('Y') }}
-                {{ /unless }}
-                {{ site_details:copyright_name ?? restaurant_details:restaurant_name ?? site:name }}
-                —
+                {{ if site_details:copyright_since && site_details:copyright_since < (now | format('Y')) }}
+                    {{ site_details:copyright_since }}–{{ now | format('Y') }}
+                {{ else }}
+                    {{ now | format('Y') }}
+                {{ /if }}
+                {{ site_details:copyright_name ?? restaurant_details:restaurant_name ?? site:name }},
                 {{ site_details:copyright_text ?? 'All rights reserved.' }}
             </p>
         </div>

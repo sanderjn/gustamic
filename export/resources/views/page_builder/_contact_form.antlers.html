@@ -14,19 +14,21 @@
         <div class="grid grid-cols-1 gap-12 lg:grid-cols-2">
             {{# Contact Information #}}
             <div>
-                <h3 class="mb-8 text-2xl font-bold text-gray-950">{{ contact_info_title ?? 'Visit Us' }}</h3>
+                <h2 class="mb-8 text-2xl font-bold text-gray-950">{{ contact_info_title ?? 'Visit Us' }}</h2>
                 {{ partial:components/contact_info :show_contact_info="show_contact_info" }}
             </div>
 
             {{# Contact Form #}}
             <div>
                 {{ if contact_form_title }}
-                    <h3 class="mb-8 text-2xl font-bold text-gray-950">{{ contact_form_title }}</h3>
+                    <h2 class="mb-8 text-2xl font-bold text-gray-950">{{ contact_form_title }}</h2>
                 {{ /if }}
                 {{ selected_form }}
                     {{ form:create in="{ handle }" }}
+                        {{ resolved_success_message = success_message ?? "Thank you for your message! We'll get back to you soon." }}
+                        {{ resolved_submit_text = submit_button_text ?? "Send Message" }}
                         {{ if success }}
-                            {{ partial:components/form_alert type="success" title="Thank you for your message! We'll get back to you soon." }}
+                            {{ partial:components/form_alert type="success" title="{{ resolved_success_message }}" }}
                         {{ /if }}
                         {{ if errors }}
                             {{ partial:components/form_alert type="error" title="Please correct the following errors:" :errors="errors" }}
@@ -60,7 +62,7 @@
                         </div>
 
                         <div class="mt-8">
-                            {{ partial:components/button text="Send Message" type="submit" size="lg" icon="true" class="transition-transform duration-200 will-change-transform hover:scale-[97%]" }}
+                            {{ partial:components/button text="{{ resolved_submit_text }}" type="submit" size="lg" icon="true" class="transition-transform duration-200 will-change-transform hover:scale-[97%]" }}
                         </div>
                     {{ /form:create }}
                 {{ /selected_form }}

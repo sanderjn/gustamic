@@ -2,58 +2,60 @@
 <html lang="{{ site:short_locale }}" class="scroll-smooth scroll-pt-24">
     <head>
         <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>
-            {{ restaurant_details:restaurant_name ?? site:name }}
-        </title>
-        <meta
-            name="description"
-            content="{{ seo_description ?? site_details:site_description ?? restaurant_details:about_description ?? site:description }}"
-        />
-        <meta
-            name="keywords"
-            content="{{ seo_keywords ?? site_details:site_keywords }}"
-        />
+
+        {{# Resolve reusable title/description values #}}
+        {{ site_name_full = restaurant_details:restaurant_name ?? site:name }}
+        {{ page_name = seo_title ?? title }}
+        {{ meta_description = seo_description ?? seo:site_description ?? site:description }}
+        {{ meta_keywords = seo_keywords ?? seo:site_keywords }}
+        {{ if page_name && page_name != site_name_full }}
+            {{ full_title = page_name + ' | ' + site_name_full }}
+        {{ else }}
+            {{ full_title = site_name_full }}
+        {{ /if }}
+        {{ og_title_full = og_title ?? full_title }}
+
+        <title>{{ full_title }}</title>
+        <meta name="description" content="{{ meta_description }}" />
+        {{ if meta_keywords }}
+            <meta name="keywords" content="{{ meta_keywords }}" />
+        {{ /if }}
         <meta name="robots" content="{{ robots ?? 'index, follow' }}" />
+        {{ if seo:google_site_verification }}
+            <meta name="google-site-verification" content="{{ seo:google_site_verification }}" />
+        {{ /if }}
 
         <!-- Open Graph Meta Tags -->
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="{{ site:locale }}" />
         <meta
             property="og:site_name"
-            content="{{ site_details:site_name ?? restaurant_details:restaurant_name ?? site:name }}"
+            content="{{ seo:site_name ?? site_name_full }}"
         />
         <meta property="og:url" content="{{ permalink }}" />
-        <meta
-            property="og:title"
-            content="{{ og_title ?? seo_title ?? title ?? site_details:site_name ?? restaurant_details:restaurant_name ?? site:name }}"
-        />
+        <meta property="og:title" content="{{ og_title_full }}" />
         <meta
             property="og:description"
-            content="{{ og_description ?? seo_description ?? site_details:site_description ?? restaurant_details:about_description ?? site:description }}"
+            content="{{ og_description ?? meta_description }}"
         />
         {{ if og_image }}
-            <meta property="og:image" content="{{ og_image }}" />
-        {{ else }}
-            <meta property="og:image" content="{{ site_details:og_image }}" />
+            <meta property="og:image" content="{{ glide:og_image absolute="true" width='1200' height='630' fit='crop' }}" />
+        {{ elseif seo:og_image }}
+            <meta property="og:image" content="{{ glide:seo:og_image absolute="true" width='1200' height='630' fit='crop' }}" />
         {{ /if }}
+
         <!-- Twitter Card Meta Tags -->
         <meta name="twitter:card" content="summary_large_image" />
-        <meta
-            name="twitter:title"
-            content="{{ og_title ?? seo_title ?? title ?? site_details:site_name ?? restaurant_details:restaurant_name ?? site:name }}"
-        />
+        <meta name="twitter:title" content="{{ og_title_full }}" />
         <meta
             name="twitter:description"
-            content="{{ og_description ?? seo_description ?? site_details:site_description ?? restaurant_details:about_description }}"
+            content="{{ og_description ?? meta_description }}"
         />
-        {{ if twitter_summary_image }}
-            <meta name="twitter:image" content="{{ twitter_summary_image }}" />
-        {{ elseif og_image }}
-            <meta name="twitter:image" content="{{ og_image }}" />
-        {{ else }}
-            <meta name="twitter:image" content="{{ site_details:og_image }}" />
+        {{ if og_image }}
+            <meta name="twitter:image" content="{{ glide:og_image absolute="true" width='1200' height='630' fit='crop' }}" />
+        {{ elseif seo:og_image }}
+            <meta name="twitter:image" content="{{ glide:seo:og_image absolute="true" width='1200' height='630' fit='crop' }}" />
         {{ /if }}
         {{ if restaurant_details:x_url }}
             <meta name="twitter:site" content="{{ restaurant_details:x_url }}" />
@@ -61,16 +63,6 @@
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="canonical" href="{{ permalink }}" />
 
-        <!-- Dynamic Brand Color CSS Variables -->
-        {{#
-            {{ if restaurant_details:brand_color }}
-                <style>
-                    :root {
-                        --brand-color: {{ restaurant_details:brand_color }};
-                    }
-                </style>
-            {{ /if }}
-        #}}
         {{ vite src="resources/js/site.js|resources/css/site.css" }}
         <!-- Google Fonts with font-display: swap for better CLS -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -79,10 +71,11 @@
             href="https://fonts.googleapis.com/css2?family=Bangers&family=Chewy&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
             rel="stylesheet"
         />
-        
+
         <!-- Preload critical font weights to minimize CLS -->
         <link rel="preload" href="https://fonts.gstatic.com/s/plusjakartasans/v7/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko20yygg_vJ.woff2" as="font" type="font/woff2" crossorigin />
 
+        <!-- Dynamic Brand Color CSS Variables -->
         <style>
             :root {
                 --brand-color: {{ restaurant_details:brand_color ?? '#0A0A0A' }};
@@ -91,29 +84,34 @@
         </style>
 
         <!-- Structured Data -->
+        {{ business_type = seo:business_type ?? 'Restaurant' }}
         <script type="application/ld+json">
             {
               "@context": "https://schema.org",
-              "@type": "Restaurant",
-              "name": "{{ restaurant_details:restaurant_name ?? site:name }}",
-              "description": "{{ site_details:site_description ?? restaurant_details:about_description }}",
-              "url": "{{ config:app:url }}",
-              "telephone": "{{ restaurant_details:phone }}",
-              "email": "{{ restaurant_details:email }}",
+              "@type": {{ business_type | to_json }},
+              "name": {{ site_name_full | to_json }},
+              "description": {{ seo:site_description | to_json }},
+              "url": {{ config:app:url | to_json }},
+              "telephone": {{ restaurant_details:phone | to_json }},
+              "email": {{ restaurant_details:email | to_json }},
+              "priceRange": {{ seo:price_range | to_json }},
+              "acceptsReservations": {{ if seo:accepts_reservations }}true{{ else }}false{{ /if }},
               {{ if restaurant_details:address }}
               "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "{{ restaurant_details:address }}"
+                "streetAddress": {{ restaurant_details:address | to_json }}
               },
               {{ /if }}
-              "servesCuisine": "Italian",
+              {{ if seo:cuisine_type }}
+              "servesCuisine": {{ seo:cuisine_type | to_json }},
+              {{ /if }}
               {{ if site_details:reservation_url }}
               "potentialAction": {
                 "@type": "ReserveAction",
                 "target": {
                   "@type": "EntryPoint",
-                  "urlTemplate": "{{ site_details:reservation_url }}",
-                  "inLanguage": "en-US",
+                  "urlTemplate": {{ site_details:reservation_url | to_json }},
+                  "inLanguage": "{{ site:short_locale }}",
                   "actionPlatform": [
                     "http://schema.org/DesktopWebPlatform",
                     "http://schema.org/IOSPlatform",
@@ -126,26 +124,34 @@
             }
         </script>
 
+        {{ if seo:google_analytics_id }}
+            <!-- Google Analytics -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id={{ seo:google_analytics_id | urlencode }}"></script>
+            <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', {{ seo:google_analytics_id | to_json }});
+            </script>
+        {{ /if }}
+
         <!-- Custom Head Scripts -->
         {{ if site_details:head_scripts }}
-            {{ { site_details:head_scripts } }}
+            {{ site_details:head_scripts }}
         {{ /if }}
     </head>
-    <body
-        x-data="{ isMobileMenuOpen: false }"
-        class="bg-[var(--background-color)] font-sans antialiased"
-    >
+    <body class="bg-[var(--background-color)] font-sans antialiased">
         <div class="flex min-h-screen flex-col">
-            {{ partial:header }}
+            {{ partial:partials/header }}
             <main class="flex-grow">
                 {{ template_content }}
             </main>
-            {{ partial:footer }}
+            {{ partial:partials/footer }}
         </div>
 
         <!-- Custom Body Scripts -->
         {{ if site_details:body_scripts }}
-            {{ { site_details:body_scripts } }}
+            {{ site_details:body_scripts }}
         {{ /if }}
     </body>
 </html>

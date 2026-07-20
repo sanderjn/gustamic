@@ -17,14 +17,16 @@
                 </p>
             </div>
         {{ /if }}
-        <div class="mt-12 aspect-video">
-            <img
-                class="h-full w-full object-cover"
-                src="{{ glide:image }}"
-                alt="{{ image:alt }}"
-                width="1920"
-                height="1080"
-            />
-        </div>
+        {{ if image }}
+            <div class="mt-12 aspect-video">
+                <img
+                    class="h-full w-full object-cover"
+                    src="{{ glide:image }}"
+                    alt="{{ image:alt ?? title }}"
+                    width="1920"
+                    height="1080"
+                />
+            </div>
+        {{ /if }}
     </div>
 </div>

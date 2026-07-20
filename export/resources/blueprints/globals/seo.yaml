@@ -41,13 +41,6 @@ tabs:
         display: "Search Engine Settings"
         fields:
           -
-            handle: robots_txt
-            field:
-              type: textarea
-              display: "Robots.txt Content"
-              instructions: "Custom robots.txt directives"
-              rows: 5
-          -
             handle: google_analytics_id
             field:
               type: text
@@ -71,11 +64,10 @@ tabs:
               default: "Restaurant"
               options:
                 Restaurant: "Restaurant"
-                Cafe: "Cafe"
-                FastFood: "Fast Food"
-                FineDining: "Fine Dining"
                 Bakery: "Bakery"
-                Bar: "Bar"
+                CafeOrCoffeeShop: "Cafe / Coffee Shop"
+                FastFoodRestaurant: "Fast Food Restaurant"
+                BarOrPub: "Bar / Pub"
           -
             handle: price_range
             field:
@@ -88,6 +80,12 @@ tabs:
                 "$$": "$$ (Moderate)"
                 "$$$": "$$$ (Expensive)"
                 "$$$$": "$$$$ (Very Expensive)"
+          -
+            handle: cuisine_type
+            field:
+              type: text
+              display: "Cuisine Type"
+              instructions: "The type of cuisine served (e.g. Italian, Japanese). Leave blank to omit from schema."
           -
             handle: accepts_reservations
             field:

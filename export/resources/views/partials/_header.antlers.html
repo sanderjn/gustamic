@@ -40,8 +40,9 @@
             class="overflow-hidden will-change-transform lg:hidden"
             x-collapse.duration.300ms
             x-show="mobileMenuOpen"
+            x-cloak
         >
-            <nav class="flex flex-col gap-4 pt-6">
+            <nav class="flex flex-col gap-4 pt-6" @click="mobileMenuOpen = false">
                 {{ nav:main }}
                     {{ partial:components/nav_link href="{{ url }}" title="{{ title }}" is_current="{{ is_current }}" variant="mobile" }}
                 {{ /nav:main }}

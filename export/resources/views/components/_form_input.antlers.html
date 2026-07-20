@@ -26,7 +26,7 @@
         name="{{ name }}"
         {{ if required }}required{{ /if }}
         class="w-full border-2 border-gray-950 bg-transparent px-4 py-3 text-gray-950 placeholder-gray-500 transition-all duration-200 hover:bg-white/50 focus:border-gray-950 focus:bg-white/70 focus:outline-none"
-        {{ if value }}value="{{ value }}"{{ /if }}
+        {{ if value }}value="{{ value | sanitize }}"{{ /if }}
         {{ if placeholder }}placeholder="{{ placeholder }}"{{ /if }}
     />
 </div>

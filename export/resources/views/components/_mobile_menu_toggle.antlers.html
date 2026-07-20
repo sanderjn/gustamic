@@ -7,6 +7,8 @@
     type="button"
     class="{{ class }} relative flex items-center justify-center text-gray-950 focus:outline-none"
     x-on:click="mobileMenuOpen = !mobileMenuOpen"
+    :aria-expanded="mobileMenuOpen"
+    aria-controls="mobile-menu"
     aria-label="Toggle mobile menu"
 >
     <span class="absolute size-12"></span>

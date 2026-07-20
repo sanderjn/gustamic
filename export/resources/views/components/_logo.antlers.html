@@ -5,14 +5,14 @@
     @param {string} class - Additional CSS classes
 #}}
 {{ if restaurant_details:restaurant_logo }}
-    <img
-        src="{{ glide:restaurant_details:restaurant_logo width='132' height='40' fit='crop' }}"
-        alt="{{ restaurant_details:restaurant_logo:alt ?? restaurant_details:restaurant_name }}"
-        class="max-h-32 w-32 object-contain"
-        width="132"
-        height="40"
-        decoding="async"
-    />
+    <a href="{{ href ?? '/' }}" class="{{ class }} inline-block focus:outline-none">
+        <img
+            src="{{ glide:restaurant_details:restaurant_logo height='80' fit='contain' }}"
+            alt="{{ restaurant_details:restaurant_logo:alt ?? restaurant_details:restaurant_name }}"
+            class="h-10 w-auto max-w-[180px] object-contain"
+            decoding="async"
+        />
+    </a>
 {{ else }}
     <a
         href="{{ href ?? '/' }}"
