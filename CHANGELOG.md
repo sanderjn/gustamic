@@ -2,6 +2,41 @@
 
 All notable changes to the Gustamic Starter Kit will be documented in this file.
 
+## [1.0.0] - 2026-07-20
+
+The "it actually works now" release. Gustamic now targets Statamic 6, and the
+install, forms, SEO and currency features that earlier versions described are
+real and wired up.
+
+### Added
+
+-   Statamic 6 support (requires PHP 8.3+ and Laravel 12+)
+-   Runs on the free Statamic Solo edition: the kit ships a single contact form and a single site, so it needs no Pro license
+-   A real contact form with a proper blueprint: name, email, phone and message
+-   Reservations handled by the external reservation button, a configurable booking link set in Site Details (appears in the header, footer and contact section), rather than a native form
+-   Form email notifications sent to the Restaurant Details email global, with the sender set as reply-to
+-   `StarterKitPostInstall` hook that prints next steps after installation, noting the kit runs on the free Solo edition
+-   `moneyphp/money` as a real Composer dependency of the kit
+-   SEO wiring: per-page title/description/Open Graph fields with global fallbacks, Google Analytics ID and site-verification fields, and a JSON-LD LocalBusiness schema driven by Control Panel fields (business type, price range, cuisine type, accepts reservations)
+-   Accessibility and UX improvements: proper tab semantics on the menu, aria attributes on the mobile menu toggle, an alt-text field on the asset container with sample alt texts, and empty states for missing images and menu items
+
+### Changed
+
+-   Install plumbing rebuilt: no more artisan/`please` install command; setup runs through the post-install hook
+-   Sample content is now genuinely optional: the base install is a three-page skeleton (home, menu, contact) with navigation, globals, blueprints, forms and background/logo assets; the sample content module adds 16 menu items, 4 categories and dish photos
+-   Money modifier rewritten: correct decimals per currency (0 for JPY, 2 for EUR, etc.), formatted in the site's locale, and tolerant of loosely formatted input. Any ISO currency the Control Panel offers now works
+-   Form redisplay is XSS-safe
+
+### Fixed
+
+-   Installation actually runs now; the previous artisan install mechanism never executed
+-   Forms now have fields and send notifications; earlier "forms" shipped without usable field definitions
+
+### Removed
+
+-   Non-functional robots.txt configuration field from SEO settings
+-   Menu item detail-page route (menu items have no detail pages)
+
 ## [0.2.0] - 2025-09-16
 
 ### Added
