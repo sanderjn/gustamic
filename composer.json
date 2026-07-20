@@ -6,8 +6,8 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Sander",
-            "email": "your-email@example.com"
+            "name": "Sander Janssen",
+            "email": "sander@sanderjanssen.nl"
         }
     ],
     "extra": {
@@ -17,7 +17,9 @@
         }
     },
     "require": {
-        "php": "^8.2",
-        "statamic/cms": "^5.0"
+        "php": "^8.3",
+        "ext-intl": "*",
+        "statamic/cms": "^6.0",
+        "moneyphp/money": "^4.7"
     }
 }
