@@ -1,29 +1,47 @@
-post_install:
-  - 'php artisan gustamic:install'
 updatable: false
 export_paths:
-  - app/Console/Commands/InstallGustamic.php
   - app/Modifiers
-  - content
-  - resources/blueprints/collections
-  - resources/blueprints/globals
-  - resources/blueprints/taxonomies
+  - resources/blueprints
+  - resources/fieldsets
+  - resources/forms
   - resources/css/site.css
   - resources/css/typography.css
-  - resources/fieldsets/page_builder.yaml
-  - resources/forms
   - resources/js/site.js
   - resources/views
-  - public/assets
+  - content/collections/menu_items.yaml
+  - content/collections/pages.yaml
+  - content/collections/pages
+  - content/taxonomies/menu_category.yaml
+  - content/navigation/main.yaml
+  - content/globals
+  - content/trees
+  - content/assets/assets.yaml
+  - public/assets/logoipsum-215.svg
+  - public/assets/.meta/logoipsum-215.svg.yaml
+  - public/assets/bg-1.jpg
+  - public/assets/.meta/bg-1.jpg.yaml
+  - public/assets/bg-2.jpg
+  - public/assets/.meta/bg-2.jpg.yaml
+  - public/assets/bg-4.jpg
+  - public/assets/.meta/bg-4.jpg.yaml
+  - public/assets/eggplant-parmesan.jpg
+  - public/assets/.meta/eggplant-parmesan.jpg.yaml
+  - public/assets/seafood-risotto.jpg
+  - public/assets/.meta/seafood-risotto.jpg.yaml
   - package.json
 dependencies:
   moneyphp/money: ^4.7
 modules:
   sample_content:
-    prompt: 'Would you like to install sample content including menu items and pages?'
+    prompt: 'Would you like to install sample content (menu items, categories and dish photos)?'
     export_paths:
-      - content/collections/pages
       - content/collections/menu_items
-      - content/taxonomies
-      - content/globals
-      - content/navigation
+      - content/taxonomies/menu_category
+      - public/assets/dish-1.jpg
+      - public/assets/.meta/dish-1.jpg.yaml
+      - public/assets/dish-2.jpg
+      - public/assets/.meta/dish-2.jpg.yaml
+      - public/assets/espresso-martini.jpg
+      - public/assets/.meta/espresso-martini.jpg.yaml
+      - public/assets/grilled-salmon.jpg
+      - public/assets/.meta/grilled-salmon.jpg.yaml
