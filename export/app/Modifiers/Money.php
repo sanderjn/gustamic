@@ -2,99 +2,103 @@
 
 namespace App\Modifiers;
 
-use Statamic\Modifiers\Modifier;
-use Money\Money as MoneyObject;
+use Money\Currencies\ISOCurrencies;
 use Money\Currency;
+use Money\Exception\ParserException;
 use Money\Formatter\IntlMoneyFormatter;
+use Money\Parser\DecimalMoneyParser;
 use NumberFormatter;
+use Statamic\Facades\Site;
+use Statamic\Modifiers\Modifier;
 
 class Money extends Modifier
 {
-    public function index($value, $params)
+    /**
+     * Format a decimal price string as localised currency.
+     *
+     * Usage: {{ price | money:USD }} or {{ price | money:USD:false }}
+     * - param 0: ISO currency code (falls back to EUR when unknown/empty)
+     * - param 1: whether to show the currency symbol (default true)
+     */
+    public function index($value, $params): string
     {
-        $currencyCode = $params[0] ?? 'USD';
-        
-        // Handle the show symbol parameter
-        $showSymbolParam = $params[1] ?? true;
-        $showSymbol = !($showSymbolParam === false || 
-                       $showSymbolParam === 'false' || 
-                       $showSymbolParam === '0' || 
-                       $showSymbolParam === 0 || 
-                       $showSymbolParam === '' ||
-                       $showSymbolParam === null);
-        
-        // Set appropriate locale based on currency
-        $locale = $params[2] ?? $this->getLocaleForCurrency($currencyCode);
+        $currencies = new ISOCurrencies();
 
-        // Convert to proper decimal value and then to cents
-        $amount = (float) str_replace(',', '.', (string) $value);
-        $amountInCents = (int) round($amount * 100);
-        
-        // Create Money object
+        $currencyCode = strtoupper(trim((string) ($params[0] ?? 'EUR')));
         $currency = new Currency($currencyCode);
-        $money = new MoneyObject($amountInCents, $currency);
-        
-        if ($showSymbol) {
-            // Format with currency symbol using IntlMoneyFormatter
-            $numberFormatter = new NumberFormatter($locale, NumberFormatter::CURRENCY);
-            $numberFormatter->setAttribute(NumberFormatter::MIN_FRACTION_DIGITS, 0);
-            $numberFormatter->setAttribute(NumberFormatter::MAX_FRACTION_DIGITS, 2);
-            $moneyFormatter = new IntlMoneyFormatter($numberFormatter, new \Money\Currencies\ISOCurrencies());
-            return $moneyFormatter->format($money);
-        } else {
-            // Format without currency symbol but with proper locale formatting
-            $numberFormatter = new NumberFormatter($locale, NumberFormatter::DECIMAL);
-            $numberFormatter->setAttribute(NumberFormatter::MIN_FRACTION_DIGITS, 0);
-            $numberFormatter->setAttribute(NumberFormatter::MAX_FRACTION_DIGITS, 2);
-            $moneyFormatter = new IntlMoneyFormatter($numberFormatter, new \Money\Currencies\ISOCurrencies());
-            return $moneyFormatter->format($money);
+
+        // Guard against unknown/empty currency codes: never throw, fall back to EUR.
+        if ($currencyCode === '' || ! $currencies->contains($currency)) {
+            $currency = new Currency('EUR');
         }
+
+        $showSymbol = $this->wantsSymbol($params[1] ?? true);
+        $locale = Site::current()->locale();
+
+        try {
+            $money = (new DecimalMoneyParser($currencies))
+                ->parse($this->normalizeAmount($value), $currency);
+        } catch (ParserException) {
+            // Malformed price: return the raw value rather than erroring the page.
+            return (string) $value;
+        }
+
+        if ($showSymbol) {
+            $numberFormatter = new NumberFormatter($locale, NumberFormatter::CURRENCY);
+
+            return (new IntlMoneyFormatter($numberFormatter, $currencies))->format($money);
+        }
+
+        // IntlMoneyFormatter always renders the currency symbol, so format the
+        // plain decimal ourselves, keeping the currency's subunit precision
+        // (e.g. 0 decimals for JPY, 2 for EUR).
+        $subunit = $currencies->subunitFor($currency);
+        $decimal = (int) $money->getAmount() / (10 ** $subunit);
+
+        $numberFormatter = new NumberFormatter($locale, NumberFormatter::DECIMAL);
+        $numberFormatter->setAttribute(NumberFormatter::MIN_FRACTION_DIGITS, $subunit);
+        $numberFormatter->setAttribute(NumberFormatter::MAX_FRACTION_DIGITS, $subunit);
+
+        return $numberFormatter->format($decimal);
     }
 
-    private function getLocaleForCurrency($currencyCode)
+    /**
+     * Normalise loose input ("1.234,56", "1,234.56", "1234.56", int) into a
+     * plain decimal string the parser understands.
+     */
+    private function normalizeAmount($value): string
     {
-        $localeMap = [
-            'EUR' => 'nl_NL', // Dutch formatting for EUR (€ before, comma for decimals)
-            'GBP' => 'en_GB',
-            'USD' => 'en_US',
-            'CAD' => 'en_CA',
-            'AUD' => 'en_AU',
-            'JPY' => 'ja_JP',
-            'CHF' => 'de_CH',
-            'SEK' => 'sv_SE',
-            'NOK' => 'nb_NO',
-            'DKK' => 'da_DK',
-            'PLN' => 'pl_PL',
-            'CZK' => 'cs_CZ',
-            'HUF' => 'hu_HU',
-            'RON' => 'ro_RO',
-            'BGN' => 'bg_BG',
-            'HRK' => 'hr_HR',
-            'RSD' => 'sr_RS',
-            'TRY' => 'tr_TR',
-            'RUB' => 'ru_RU',
-            'UAH' => 'uk_UA',
-            'BRL' => 'pt_BR',
-            'MXN' => 'es_MX',
-            'ARS' => 'es_AR',
-            'CLP' => 'es_CL',
-            'COP' => 'es_CO',
-            'PEN' => 'es_PE',
-            'CNY' => 'zh_CN',
-            'INR' => 'hi_IN',
-            'KRW' => 'ko_KR',
-            'THB' => 'th_TH',
-            'VND' => 'vi_VN',
-            'PHP' => 'fil_PH',
-            'IDR' => 'id_ID',
-            'MYR' => 'ms_MY',
-            'SGD' => 'en_SG',
-            'HKD' => 'zh_HK',
-            'TWD' => 'zh_TW',
-            'NZD' => 'en_NZ',
-            'ZAR' => 'en_ZA',
-        ];
+        $value = trim((string) $value);
 
-        return $localeMap[$currencyCode] ?? 'en_US';
+        if ($value === '') {
+            return '0';
+        }
+
+        $lastComma = strrpos($value, ',');
+        $lastDot = strrpos($value, '.');
+
+        if ($lastComma !== false && $lastDot !== false) {
+            // Whichever separator comes last is the decimal separator.
+            $decimal = $lastComma > $lastDot ? ',' : '.';
+            $thousands = $decimal === ',' ? '.' : ',';
+            $value = str_replace($thousands, '', $value);
+            $value = str_replace($decimal, '.', $value);
+        } elseif ($lastComma !== false) {
+            if (substr_count($value, ',') > 1) {
+                // Multiple commas, no dots: thousands separators (e.g. "1,234,567").
+                $value = str_replace(',', '', $value);
+            } else {
+                // Single comma, no dots: decimal separator (e.g. "1234,56").
+                $value = str_replace(',', '.', $value);
+            }
+        }
+        // Only dots (or none): already a valid decimal string.
+
+        return $value;
+    }
+
+    private function wantsSymbol($param): bool
+    {
+        return ! in_array($param, [false, 'false', '0', 0, '', null], true);
     }
 }
