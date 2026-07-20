@@ -1,4 +1,5 @@
-data: {  }
+data:
+  alt: 'Grilled salmon fillet with seasonal vegetables'
 size: 100720
 last_modified: 1754407662
 width: 1280

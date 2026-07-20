@@ -1,4 +1,5 @@
-data: {  }
+data:
+  alt: 'Restaurant logo'
 size: 6300
 last_modified: 1756471190
 width: 132.0

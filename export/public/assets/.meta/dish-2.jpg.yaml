@@ -1,4 +1,5 @@
-data: {  }
+data:
+  alt: 'Freshly plated gourmet dish'
 size: 265203
 last_modified: 1751017488
 width: 1920

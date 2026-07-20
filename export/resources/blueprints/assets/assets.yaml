@@ -1,0 +1,8 @@
+title: Assets
+fields:
+  -
+    handle: alt
+    field:
+      type: text
+      display: 'Alt Text'
+      instructions: 'Describe the image for screen readers and search engines.'

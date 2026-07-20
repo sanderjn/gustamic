@@ -45,11 +45,14 @@ tabs:
           - handle: menu_category
             field:
               type: terms
+              required: true
               taxonomies:
                 - menu_category
               display: "Menu Category"
               mode: select
               max_items: 1
+              validate:
+                - required
           - handle: featured
             field:
               type: toggle

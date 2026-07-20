@@ -1,6 +1,6 @@
 ---
 id: home
-blueprint: pages
+blueprint: page
 title: Home
 template: page_templates/home
 slug: /
@@ -47,12 +47,4 @@ updated_by: 6a910e93-5e1e-4938-981a-229b19c6d0fd
 updated_at: 1758029793
 author: 6a910e93-5e1e-4938-981a-229b19c6d0fd
 robots: 'index, follow'
-contact_contact_info_title: 'Visit Us'
-contact_show_contact_info:
-  - address
-  - phone
-  - email
-  - hours
-  - reservation_button
-contact_contact_form_title: 'Get in Touch'
 ---
