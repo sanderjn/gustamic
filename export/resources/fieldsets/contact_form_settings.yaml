@@ -1,0 +1,52 @@
+title: 'Contact Form Settings'
+fields:
+  -
+    handle: selected_form
+    field:
+      type: form
+      display: 'Contact Form'
+      instructions: 'Choose the form to display in this section.'
+      max_items: 1
+  -
+    handle: contact_info_title
+    field:
+      type: text
+      display: 'Contact Info Heading'
+      default: 'Visit Us'
+  -
+    handle: contact_form_title
+    field:
+      type: text
+      display: 'Contact Form Heading'
+      default: 'Get in Touch'
+  -
+    handle: submit_button_text
+    field:
+      type: text
+      display: 'Submit Button Text'
+      default: 'Send Message'
+  -
+    handle: success_message
+    field:
+      type: text
+      display: 'Success Message'
+      instructions: 'Shown after the form is submitted successfully.'
+      default: "Thank you for your message! We'll get back to you soon."
+  -
+    handle: show_contact_info
+    field:
+      type: checkboxes
+      display: 'Show Contact Details'
+      instructions: 'Select which contact details to display alongside the form.'
+      options:
+        address: Address
+        phone: Phone
+        email: Email
+        hours: 'Opening Hours'
+        reservation_button: 'Reservation Button'
+      default:
+        - address
+        - phone
+        - email
+        - hours
+        - reservation_button

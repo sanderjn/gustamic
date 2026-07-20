@@ -45,38 +45,24 @@
 
         <div class="field">
             <div class="field-label">Name:</div>
-            <div class="field-value">{{ name }}</div>
+            <div class="field-value">{{ name | sanitize }}</div>
         </div>
 
         <div class="field">
             <div class="field-label">Email:</div>
-            <div class="field-value">{{ email }}</div>
+            <div class="field-value">{{ email | sanitize }}</div>
         </div>
 
         {{ if phone }}
         <div class="field">
             <div class="field-label">Phone:</div>
-            <div class="field-value">{{ phone }}</div>
-        </div>
-        {{ /if }} {{ if preferred_date }}
-        <div class="field">
-            <div class="field-label">Preferred Date:</div>
-            <div class="field-value">
-                {{ preferred_date | format('F j, Y') }}
-            </div>
-        </div>
-        {{ /if }} {{ if preferred_time }}
-        <div class="field">
-            <div class="field-label">Preferred Time:</div>
-            <div class="field-value">
-                {{ preferred_time | format('g:i A') }}
-            </div>
+            <div class="field-value">{{ phone | sanitize }}</div>
         </div>
         {{ /if }}
 
         <div class="field">
             <div class="field-label">Message:</div>
-            <div class="field-value">{{ message | nl2br }}</div>
+            <div class="field-value">{{ message_body | sanitize | nl2br }}</div>
         </div>
 
         <hr

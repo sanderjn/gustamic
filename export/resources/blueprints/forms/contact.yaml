@@ -1,0 +1,42 @@
+title: 'Contact Form'
+tabs:
+  main:
+    display: Main
+    sections:
+      -
+        fields:
+          -
+            handle: name
+            field:
+              type: text
+              display: Name
+              required: true
+              validate:
+                - required
+              width: 50
+          -
+            handle: email
+            field:
+              type: text
+              input_type: email
+              display: Email
+              required: true
+              validate:
+                - required
+                - email
+              width: 50
+          -
+            handle: phone
+            field:
+              type: text
+              input_type: tel
+              display: Phone
+          -
+            handle: message_body
+            field:
+              type: textarea
+              display: Message
+              required: true
+              validate:
+                - required
+              rows: 6

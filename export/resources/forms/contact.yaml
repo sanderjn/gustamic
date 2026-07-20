@@ -2,8 +2,7 @@ title: 'Contact Form'
 honeypot: website
 email:
   -
-    to: info@gustamic.com
-    from: '{{ email }}'
+    to: '{{ restaurant_details:email }}'
     reply_to: '{{ email }}'
     subject: 'New contact message from {{ name }}'
-    template: _contact-notification
+    html: 'email._contact-notification'
