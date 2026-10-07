@@ -2,6 +2,8 @@
 
 A modern, **no-code-required** Statamic starter kit designed specifically for restaurants, cafes, and food businesses. Built with Tailwind CSS v4 and some Alpine.js for interactivity.
 
+**Live demo:** [gustamic.sanderjanssen.app](https://gustamic.sanderjanssen.app/)
+
 It works out of the box on Statamic's free Solo edition: one content form (contact), one user and one site is all it needs.
 
 ## Perfect for Non-Developers
@@ -140,6 +142,8 @@ All these settings can be managed without any coding knowledge, just fill in the
 -   Laravel 12+
 -   Statamic 6 (the free Solo edition is enough: the kit needs only one form, one user and one site)
 
+The kit is install-tested on Statamic 6.35 with Laravel 13.
+
 The kit ships single-site content, with globals stored for the default site only. Multi-site setups need to localize the globals themselves after install.
 
 ### Installation
@@ -150,7 +154,7 @@ Install this starter kit via the Statamic CLI:
 statamic new my-restaurant sanderjn/gustamic
 ```
 
-During installation you'll be prompted whether to include sample content. Choose "Yes" for example menu items, categories and dish photos to help you get started.
+During installation you'll be prompted whether to include sample content. Choose "Yes" for example menu items, categories and dish photos to help you get started. On non-interactive installs (for example with `--no-interaction`) the sample content module is included by default.
 
 #### What you get
 
@@ -263,6 +267,14 @@ npm run build
 -   Fitty: dynamic text fitting
 
 > The kit ships a `package.json` but no `vite.config.js`, so its build tool versions track the Statamic 6 app skeleton (Vite, the Laravel Vite plugin, Tailwind and its Vite plugin).
+
+## License
+
+MIT, see [LICENSE](LICENSE).
+
+## Image credits
+
+The sample photos come from [Unsplash](https://unsplash.com) and are used under the [Unsplash License](https://unsplash.com/license). The sample logo is a placeholder from [Logoipsum](https://logoipsum.com). Replace both with your own before going live.
 
 ## Support
 

@@ -2,6 +2,26 @@
 
 All notable changes to the Gustamic Starter Kit will be documented in this file.
 
+## [1.1.0] - 2026-10-07
+
+### Added
+
+-   MIT `LICENSE` file and a `.gitignore`
+-   Live demo link and image credits (Unsplash photos, Logoipsum placeholder logo) in the README
+
+### Changed
+
+-   Menu links on the featured menu section and in the footer now follow the menu page entry instead of a hardcoded `/menu` path, so renaming the page slug keeps them working
+-   JSON-LD `sameAs` now lists the social profiles configured in Restaurant Details
+-   JSON-LD and analytics values are encoded script-safe, so a stray `</script>` in a Control Panel field cannot break out of the script tag
+-   Install verified on Statamic 6.35 / Laravel 13
+
+### Fixed
+
+-   Sample content now installs by default on non-interactive installs, instead of being skipped
+-   Removed the unused Bangers and Chewy font loads and the broken hardcoded font preload
+-   Removed the two faint footer divider lines that the original design never showed
+
 ## [1.0.0] - 2026-07-20
 
 The "it actually works now" release. Gustamic now targets Statamic 6, and the

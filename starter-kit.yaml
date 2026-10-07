@@ -33,6 +33,7 @@ dependencies:
   moneyphp/money: ^4.7
 modules:
   sample_content:
+    default: true
     prompt: 'Would you like to install sample content (menu items, categories and dish photos)?'
     export_paths:
       - content/collections/menu_items

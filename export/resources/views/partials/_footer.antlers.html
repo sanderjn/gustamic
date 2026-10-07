@@ -37,7 +37,7 @@
             {{ /if }}
         </div>
         <div
-            class="mt-16 grid grid-cols-1 gap-12 border-t border-black/10 sm:grid-cols-2 lg:mt-24 lg:grid-cols-4 lg:gap-16"
+            class="mt-16 grid grid-cols-1 gap-12 sm:grid-cols-2 lg:mt-24 lg:grid-cols-4 lg:gap-16"
         >
             <div>
                 <h3 class="text-xl font-semibold uppercase">
@@ -51,7 +51,7 @@
                         {{ taxonomy:menu_category sort="sort_order:asc" }}
                             <li>
                                 <a
-                                    href="/menu#{{ slug }}"
+                                    href="{{ link id="entry::menu" }}#{{ slug }}"
                                     class="hover-underline inline-block font-medium text-gray-950 transition-colors"
                                 >
                                     {{ title }}
@@ -77,7 +77,7 @@
             </div>
         </div>
         <div
-            class="mt-16 border-t border-black/10 md:flex md:items-center md:justify-between lg:mt-24"
+            class="mt-16 md:flex md:items-center md:justify-between lg:mt-24"
         >
             <div class="flex flex-wrap items-center gap-6 md:order-2">
                 {{ if restaurant_details:facebook_url }}
