@@ -85,29 +85,29 @@
         <script type="application/ld+json">
             {
               "@context": "https://schema.org",
-              "@type": {{ business_type | to_json }},
-              "name": {{ site_name_full | to_json }},
-              "description": {{ seo:site_description | to_json }},
-              "url": {{ config:app:url | to_json }},
-              "telephone": {{ restaurant_details:phone | to_json }},
-              "email": {{ restaurant_details:email | to_json }},
-              "priceRange": {{ seo:price_range | to_json }},
+              "@type": {{ business_type | to_json('safe') }},
+              "name": {{ site_name_full | to_json('safe') }},
+              "description": {{ seo:site_description | to_json('safe') }},
+              "url": {{ config:app:url | to_json('safe') }},
+              "telephone": {{ restaurant_details:phone | to_json('safe') }},
+              "email": {{ restaurant_details:email | to_json('safe') }},
+              "priceRange": {{ seo:price_range | to_json('safe') }},
               "acceptsReservations": {{ if seo:accepts_reservations }}true{{ else }}false{{ /if }},
               {{ if restaurant_details:address }}
               "address": {
                 "@type": "PostalAddress",
-                "streetAddress": {{ restaurant_details:address | to_json }}
+                "streetAddress": {{ restaurant_details:address | to_json('safe') }}
               },
               {{ /if }}
               {{ if seo:cuisine_type }}
-              "servesCuisine": {{ seo:cuisine_type | to_json }},
+              "servesCuisine": {{ seo:cuisine_type | to_json('safe') }},
               {{ /if }}
               {{ if site_details:reservation_url }}
               "potentialAction": {
                 "@type": "ReserveAction",
                 "target": {
                   "@type": "EntryPoint",
-                  "urlTemplate": {{ site_details:reservation_url | to_json }},
+                  "urlTemplate": {{ site_details:reservation_url | to_json('safe') }},
                   "inLanguage": "{{ site:short_locale }}",
                   "actionPlatform": [
                     "http://schema.org/DesktopWebPlatform",
@@ -117,7 +117,7 @@
                 }
               },
               {{ /if }}
-              "sameAs": {{ arr(restaurant_details:facebook_url, restaurant_details:instagram_url, restaurant_details:yelp_url, restaurant_details:tripadvisor_url, restaurant_details:tiktok_url, restaurant_details:x_url, restaurant_details:threads_url, restaurant_details:bluesky_url) | filter_empty | values | to_json }}
+              "sameAs": {{ arr(restaurant_details:facebook_url, restaurant_details:instagram_url, restaurant_details:yelp_url, restaurant_details:tripadvisor_url, restaurant_details:tiktok_url, restaurant_details:x_url, restaurant_details:threads_url, restaurant_details:bluesky_url) | filter_empty | values | to_json('safe') }}
             }
         </script>
 
@@ -128,7 +128,7 @@
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
-                gtag('config', {{ seo:google_analytics_id | to_json }});
+                gtag('config', {{ seo:google_analytics_id | to_json('safe') }});
             </script>
         {{ /if }}
 

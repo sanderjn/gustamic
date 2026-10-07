@@ -2,7 +2,7 @@
 
 All notable changes to the Gustamic Starter Kit will be documented in this file.
 
-## [Unreleased]
+## [1.1.0] - 2026-10-07
 
 ### Added
 
@@ -13,6 +13,7 @@ All notable changes to the Gustamic Starter Kit will be documented in this file.
 
 -   Menu links on the featured menu section and in the footer now follow the menu page entry instead of a hardcoded `/menu` path, so renaming the page slug keeps them working
 -   JSON-LD `sameAs` now lists the social profiles configured in Restaurant Details
+-   JSON-LD and analytics values are encoded script-safe, so a stray `</script>` in a Control Panel field cannot break out of the script tag
 -   Install verified on Statamic 6.35 / Laravel 13
 
 ### Fixed
