@@ -19,7 +19,7 @@ All notable changes to the Gustamic Starter Kit will be documented in this file.
 
 -   Sample content now installs by default on non-interactive installs, instead of being skipped
 -   Removed the unused Bangers and Chewy font loads and the broken hardcoded font preload
--   Footer dividers now have spacing below them instead of touching the headings and copyright line
+-   Removed the two faint footer divider lines that the original design never showed
 
 ## [1.0.0] - 2026-07-20
 
